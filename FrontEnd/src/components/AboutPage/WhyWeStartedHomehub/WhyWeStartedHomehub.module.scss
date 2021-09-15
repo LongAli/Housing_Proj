@@ -107,12 +107,16 @@
 
   .by {
     padding: 0.5rem 3rem;
-    background-color: $primary-700-color;
+    background-color: $primary-400-color;
     color: white;
+
+    @include font-type('subtitle 1');
   }
 
   .students {
     padding: 0.5rem 3rem;
-    color: $primary-700-color;
+    color: $primary-400-color;
+    
+    @include font-type('subtitle 1');
   }
 }

@@ -4,3 +4,6 @@ export { default as housing } from './housing.svg';
 export { default as logo } from './logo.svg';
 export { default as newLogo } from './newLogo.svg';
 export { default as community } from './community.svg';
+export { default as bannerGeisel } from './landingBanner_geisel.svg';
+export { default as cardHouse } from './cardHouse.png';
+export { default as cardPeople } from './cardPeople.png';

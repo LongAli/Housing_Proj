@@ -37,3 +37,4 @@ export { default as congrats } from './congrats.svg';
 export { default as triton } from './triton.svg';
 export { default as paperAirplane } from './paperAirplane.svg';
 export { default as tritonPng } from './triton.png';
+export { default as orangeArrow } from './orangeArrow.svg';

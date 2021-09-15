@@ -1,130 +1,169 @@
-.title {
-  margin-top: 13rem;
-  margin-bottom: 13rem;
+.background {
+  background-color: white;
 }
 
-.intro {
-  margin-top: 10rem;
-  margin-bottom: 10rem;
-  justify-content: center;
-}
-
-.caption {
-  color: $primary-light-color;
-  font-size: 1.5rem;
-  font-weight: bold;
-  justify-content: center;
-  margin: 1.25rem;
-}
-
-.text {
-  margin-top: 3.2rem;
+.banner {
+  padding-top: 10rem;
+  width: 100%;
+  position: relative;
   justify-content: center;
   text-align: center;
+  background-color: $background-color;
+  overflow: hidden;
 
-  @include font-type('body 1');
-}
-
-.textLg {
-  justify-content: center;
-
-  @include font-type('h3');
-}
-
-.subtext {
-  color: $primary-dark-color;
-  justify-content: center;
-  margin-bottom: 3.2rem;
-  margin-top: 0.25rem;
-  text-align: center;
-
-  @include font-type('body 2');
-}
-
-.subtextIntro {
-  justify-content: center;
-  margin-bottom: 2rem;
-  margin-top: 1rem;
-
-  @include bp-up('lg') {
-    max-width: 25rem;
+  .bannerContent {
+    position: relative;
+    z-index: 1;
   }
 
-  @include font-type('body 1');
-}
+  .text {
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
 
-.textSm {
-  @include font-type('body 3');
-}
-
-.smallImg {
-  height: 8.5rem;
-}
-
-.buttonInner {
-  margin: inherit; // use parent's margin since they are the same by design
-}
-
-.buttonLink {
-  text-decoration: none;
-}
-
-.smallRow {
-  justify-content: center;
-  margin-bottom: 0.5rem;
-}
-
-.bigRow,
-.center {
-  display: flex;
-  justify-content: center;
-}
-
-.iconRow {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-}
-
-.introCol {
-  margin: 2rem;
-}
-
-.housingicon {
-  display: flex;
-}
-
-.textIntro,
-.subtextIntro {
-  @include bp-down('md') {
-    text-align: center;
-    margin-left: 0;
-    margin-right: 0;
+    @include font-type('body 1');
   }
-}
-
-.logoText {
-  color: $primary-light-color;
-  margin-left: 1rem;
-
-  @include font-type('h2');
 }
 
 .logo {
-  height: 4.125rem;
-  width: 4.125rem;
+  min-width: 330px;
+  max-width: 800px;
+  width: 38vw;
+  height: auto;
 }
 
-.dot {
-  height: 0.5rem;
-  width: 0.5rem;
-  background-color: $primary-200-color;
-  margin-left: 0.4rem;
-  margin-right: 0.4rem;
-  margin-bottom: 0.3rem;
-  border-radius: 50%;
-  display: inline-block;
+.byStudents {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3.5rem;
+  margin-bottom: 10rem;
+
+  .by {
+    padding: 0.5rem 3rem;
+    background-color: $primary-400-color;
+    color: white;
+
+    @include font-type('subtitle 1');
+  }
+
+  .students {
+    padding: 0.5rem 3rem;
+    color: $primary-400-color;
+
+    @include font-type('subtitle 1');
+  }
 }
 
-.container {
-  max-width: 100%;
+.bannerGeisel {
+  z-index: 0;
+  bottom: 0;
+  right: -5rem;
+  position: absolute;
+}
+
+div.homePageCardRow {
+  width: 80vw;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 1rem;
+  justify-content: space-evenly;
+}
+
+.middleGap {
+  max-width: 60px;
+}
+
+.homePageCardCol {
+  height: 30vh;
+
+  @include bp-down('lg') {
+    height: 600px;
+    margin-bottom: 1.5rem;
+  }
+
+  @include bp-down('md') {
+    height: auto;
+  }
+}
+
+.homePageCard {
+  left: 0;
+  top: 50%;
+  background-color: white;
+  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.18);
+  border-radius: 8px;
+  position: absolute;
+  transition: all 1s;
+  max-width: 30rem;
+  padding-bottom: 3rem;
+
+  &:hover {
+    @include bp-up('md') {
+      left: 32px;
+      top: calc(50% - 32px);
+    }
+  }
+
+  > div {
+    justify-content: center;
+  }
+
+  @include bp-down('xl') {
+    width: 80vw;
+    position: relative;
+    margin: auto;
+  }
+  @include bp-down('md') {
+    width: auto;
+    top: 20%;
+  }
+}
+
+.cardImage {
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 350px;
+  background-size: contain;
+}
+
+.cardBottom {
+  text-align: center;
+}
+
+.homePageCardText {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  text-align: center;
+}
+
+.homePageCardTextTitle {
+  margin-bottom: 1rem;
+
+  @include font-type('subtitle 1');
+}
+
+.postPlace {
+  position: relative;
+  margin-top: 10rem;
+}
+
+.stepImage {
+  transition: all 1s;
+}
+
+.postStep {
+  &Arrow {
+    visibility: hidden;
+  }
+
+  &Arrow.currentStep {
+    visibility: visible;
+  }
+
+  &Text {
+    background-color: $primary-300-color;
+  }
 }
