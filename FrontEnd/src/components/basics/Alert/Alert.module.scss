@@ -29,10 +29,9 @@
 }
 
 .text {
-  font-size: 20px;
-  line-height: 120%;
-  letter-spacing: 0.03rem;
   color: $black-color;
+
+  @include font-type('body 3');
 }
 
 .button:hover {

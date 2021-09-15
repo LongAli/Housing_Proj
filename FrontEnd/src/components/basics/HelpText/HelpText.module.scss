@@ -1,0 +1,40 @@
+.helpTextContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.content {
+  display: inline;
+  flex-wrap: wrap;
+  margin-right: 2.5rem;
+}
+
+div.noPadding {
+  padding-right: 0rem;
+}
+
+.icon {
+  display: inline;
+  padding-right: 0.5rem;
+}
+
+.text {
+  @include font-type('body 3');
+  display: inline;
+  align-content: center;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.default {
+  color: $disabled-medium-emphasis-color;
+  @include svg-fill(none, $stroke: $disabled-medium-emphasis-color);
+}
+
+.red {
+  color: $error-color;
+}

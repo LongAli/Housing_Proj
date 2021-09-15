@@ -19,7 +19,7 @@ const GeneralInfo: FunctionComponent<GeneralInfoProps> = ({
   placeName,
 }) => {
   const [copied, setCopy] = useState(false);
-
+  
   return (
     <div className={styles.textPortion}>
       <div className={styles.name}>{placeName}</div>
@@ -44,6 +44,9 @@ const GeneralInfo: FunctionComponent<GeneralInfoProps> = ({
         <div>
           <div className={styles.distanceText}>
             <miscIcons.busIcon />~{distance}
+            <div className={styles.note}>
+              (Time vary based on real-time traffic)
+            </div>
           </div>
           <div className={styles.transitText}>
             public transit from Price Center

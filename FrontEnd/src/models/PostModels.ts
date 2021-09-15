@@ -60,6 +60,7 @@ export interface LandlordHousePost {
 // all values on the frontend are strings since they are native to inputs
 // they will be (if valid) transformed to required types when sent to backend
 export interface StudentHousePost {
+  isPreview?: boolean;
   photos: File[];
   address: string;
   distance: string;

@@ -56,7 +56,7 @@ const StudentHousePostPreview: FunctionComponent<StudentHousePostPreviewProps> =
         />
         {loading && <Loading text="Getting your post ready..." />}
         <Row className={cn(parentStyles.wrapperRow, styles.previewBody)}>
-          <StudentHouseProfile {...props} />
+          <StudentHouseProfile {...props} isPreview/>
           <StickyBar>
             <Col xs={12} lg={10} className="p-md-0 order-1">
               <Alert

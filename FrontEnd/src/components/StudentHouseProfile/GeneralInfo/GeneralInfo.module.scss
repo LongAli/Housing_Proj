@@ -33,6 +33,14 @@
   @include text-overflow-ellipsis;
 }
 
+.note {
+  color: $disabled-medium-emphasis-color;
+  display: inline;
+  margin-left: 0.25rem;
+
+  @include font-type('body 5');
+}
+
 .address {
   height: 3rem;
   display: flex;
@@ -63,7 +71,7 @@
   align-items: center;
   justify-content: center;
   margin-left: auto;
-
+  
   &:hover {
     cursor: pointer;
   }
