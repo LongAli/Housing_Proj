@@ -37,7 +37,7 @@ const NavBar: FunctionComponent = () => {
       <div className={styles.container}>
         <div className="mr-auto">
           <a href="/housing">
-            <landingIcons.logo className={styles.logo} />
+            <landingIcons.newLogo className={styles.giLogo} />
           </a>
         </div>
         <Row className="align-items-center">

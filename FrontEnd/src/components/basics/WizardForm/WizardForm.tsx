@@ -9,9 +9,11 @@ export type ValidationError =
   | { success: true; error: undefined; data?: string }
   | { success: false; error: ZodIssue; data?: string }; // TODO maybe make data just undefined here
 
-export type ValidationErrors<P> = Partial<{
-  [key in keyof P]: ValidationError;
-}>;
+export type ValidationErrors<P> = Partial<
+  {
+    [key in keyof P]: ValidationError;
+  }
+>;
 
 /**
  * Each child component will be given:
@@ -60,6 +62,7 @@ interface WizardFormProps<T = {}> {
   // This also indicates the current store and index needs to be reset.
   // TODO: decouple this with default cleanup as well.
   externalCleanUp?: () => void;
+  callOnHideOnSubmit?: boolean; // Allow devs to decide whether to call onHide when user clicks Submit.
 }
 
 // Not using FunctionComponent as a work around to allow for generics for Wizard Form. Do not do this normally.
@@ -80,6 +83,7 @@ const WizardForm = <T extends {}>({
   lastButtonText = 'Submit',
   parentOnStoreChange,
   externalCleanUp,
+  callOnHideOnSubmit,
 }: WizardFormProps<T>) => {
   const [curIndex, setCurIndex] = useState<number>(0);
   const [isFirst, setIsFirst] = useState<boolean>(true);
@@ -285,7 +289,7 @@ const WizardForm = <T extends {}>({
       ...cur,
     }));
     const success = await onSubmit(combined as T);
-    if (success) exitWizardForm();
+    if (success && callOnHideOnSubmit) exitWizardForm();
     return { success };
   };
 

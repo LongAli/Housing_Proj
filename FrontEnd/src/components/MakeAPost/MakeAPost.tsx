@@ -27,6 +27,7 @@ import Page7, { page7InitialStore, page7Schema, Page7Store } from './Page7';
 import Page8, { page8InitialStore, page8Schema, Page8Store } from './Page8';
 import { SuccessPopUp } from './PopUps';
 import { roomCapacities as rCapacities, habits } from '@constants';
+import { QuitPopUp } from './PopUps';
 
 export type Store = Page1Store &
   Page2Store &
@@ -138,6 +139,7 @@ const initialStoreArray = [
 const MakeAPost: FunctionComponent = () => {
   const [showPreview, setShowPreview] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showQuit, setShowQuit] = useState(false);
   const [cleanUp, setCleanUp] = useState<() => void>();
   const [previewData, setPreviewData] = useState<StudentHousePost>();
   // Mirrors whatever inside wizard form.
@@ -178,7 +180,18 @@ const MakeAPost: FunctionComponent = () => {
 
   return (
     <>
-      <SuccessPopUp open={showSuccess} onClose={() => setShowSuccess(false)} />
+      <QuitPopUp
+        open={showQuit}
+        onClose={() => setShowQuit(false)}
+        onQuit={() => dispatch(hidePost())}
+      />
+
+      <SuccessPopUp
+        open={showSuccess}
+        onClose={() => {
+          setShowSuccess(false);
+        }}
+      />
 
       {showPreview &&
         previewData && ( // need the preview data to be processed
@@ -196,7 +209,7 @@ const MakeAPost: FunctionComponent = () => {
               await mutate();
             }}
             onEdit={() => {
-              setShowPreview(false); // normally this isn't a problem, but we could use useEffect if there is
+              setShowPreview(false);
               dispatch(showPost());
             }}
             {...previewData}
@@ -205,7 +218,7 @@ const MakeAPost: FunctionComponent = () => {
 
       <WizardForm<Store>
         show={ShouldShowPost}
-        onHide={() => console.log('todo, shouldnt have an onHide for this...')}
+        onHide={() => setShowQuit(true)}
         onSubmit={async (data) => {
           setShowPreview(true);
           const post = await dataProcessHelper({

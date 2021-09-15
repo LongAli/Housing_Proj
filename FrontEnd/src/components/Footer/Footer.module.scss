@@ -1,7 +1,8 @@
 .wrapper {
-  width: 100%;
-  background-color: $primary-50-color;
-  padding: 3rem $entire-site-margin-x;
+  min-width: 100vw;
+  background-color: white;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
   margin-top: $filter-top-margin;
 
   @include bp-down('sm') {
@@ -9,40 +10,71 @@
   }
 }
 
-// provides margin bottom to every child except last one
+// Provides margin bottom to every child except last one.
 .marginBottomProvider div:not(:last-child) {
   margin-bottom: 0.2rem;
 }
 
-.getStarted {
-  color: $primary-400-color !important;
-  text-align: left;
-}
-
-.greyedOut {
+.copyRighttext {
   color: $disabled-low-emphasis-color;
-}
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+  text-align: center;
 
-.homehubOrange {
-  color: $primary-400-color;
-}
-
-.ellipses svg {
-  fill: $primary-100-color;
-  stroke: none;
-}
-
-.ellipses {
   @include font-type('body 5');
 }
 
-.homehubLabel {
+.copyRight {
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-items: center;
 }
 
 .email {
   word-break: break-word;
+}
+
+.childrenText {
+  padding-top: 0.3em;
+
+  @include font-type('body 3');
+}
+.childrenText:hover {
+  text-decoration: underline;
+}
+
+.logoText {
+  color: $primary-300-color;
+  display: inline-block;
+  margin-right: 1em;
+
+  @include font-type('subtitle 5');
+}
+
+.logoTextWrap {
+  display: flex;
+  margin-top: 0.8rem;
+  margin-bottom: 3rem;
+}
+
+.titleText {
+  margin-top: 0.25rem;
+  margin-left: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.footerIcon {
+  @include svg-fill($primary-300-color, 2rem, 2rem);
+}
+
+.linkSection {
+  margin-top: 0.8rem;
 }
 
 .childrenText {

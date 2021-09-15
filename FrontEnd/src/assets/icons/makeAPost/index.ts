@@ -7,4 +7,5 @@ export { default as Photo } from './photo.svg';
 export { default as Search } from './search.svg';
 export { default as Text } from './text.svg';
 export { default as FailPost } from './failPost.svg';
+export { default as QuitPost } from './quitPost.svg';
 export { default as PostWindow } from './postwindow.svg';
