@@ -6,83 +6,117 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link, Subtitle2, Button } from '@basics';
 import { miscIcons } from '@icons';
-import { showLogin } from '@redux';
-import { useDispatch } from 'react-redux';
+// import { showLogin } from '@redux';
+// import { useDispatch } from 'react-redux';
 
 const FirstColumn: FunctionComponent = () => {
-  const dispatch = useDispatch();
-
   return (
-    <div className={cn(styles.marginBottomProvider, 'px-md-0 px-3')}>
-      <Button
-        variant="wrapper"
-        className={styles.getStarted}
-        onClick={() => dispatch(showLogin())}
-      >
-        <Subtitle2>Get Started</Subtitle2>
-      </Button>
-
-      <Link href="/" undecorated>
-        <div className={styles.childrenText}>About</div>
+    <div className={cn(styles.marginBottomProvider)}>
+      <Link href="/housing" undecorated>
+        <miscIcons.newLogo />
       </Link>
-
-      <Link href="/" undecorated>
-        <div className={styles.childrenText}>Join Us</div>
-      </Link>
+      <div className={styles.logoTextWrap}>
+        <div className={styles.logoText}>By Students</div>
+        <div className={styles.logoText}>For Students</div>
+        <div className={styles.logoText}>With Students</div>
+      </div>
     </div>
   );
 };
 
 const homehubEmail = 'homehubdope@gmail.com';
 
-const Email = () => (
-  <Link href={`mailto:${homehubEmail}`} external undecorated>
-    <div className={cn(styles.greyedOut, styles.email, styles.childrenText)}>
-      {homehubEmail}
-    </div>
-  </Link>
-);
+// const Email = () => (
+//   <Link href={`mailto:${homehubEmail}`} external undecorated>
+//     <div className={cn(styles.greyedOut, styles.email, styles.childrenText)}>
+//       {homehubEmail}
+//     </div>
+//   </Link>
+// );
 
 const SecondColumn: FunctionComponent = () => (
   <div className={styles.marginBottomProvider}>
-    <div>
-      <Subtitle2>Got feedback or questions?</Subtitle2>
-    </div>
-
-    <div className={styles.childrenText}>
-      Shoot us an email @ <Email />
-    </div>
-
-    <div className={(styles.greyedOut, styles.childrenText)}>
-      {/* copyright symbol */}
-      &copy; All rights reserved @Homehub 2020
-    </div>
+    <Row>
+      <Col xs={1} md={2}>
+        <div className={styles.footerIcon}>
+          <miscIcons.footerStart />
+        </div>
+      </Col>
+      <Col className={styles.titleText} xs={9} md={8}>
+        <Subtitle2>Start</Subtitle2>
+        <div className={styles.linkSection}>
+          <Link href="/" undecorated>
+            <div className={styles.childrenText}>Make a Post</div>
+          </Link>
+          <Link href={`mailto:${homehubEmail}`} undecorated>
+            <div className={styles.childrenText}>Sign Up</div>
+          </Link>
+          <Link href="/" undecorated>
+            <div className={styles.childrenText}>LogIn</div>
+          </Link>
+        </div>
+      </Col>
+    </Row>
   </div>
 );
 
 const ThirdColumn: FunctionComponent = () => (
-  <div className={cn(styles.marginBottomProvider, styles.homehubOrange)}>
+  <div className={cn(styles.marginBottomProvider)}>
     <Row>
-      <Col className={styles.homehubLabel}>
-        <Link href="/housing" undecorated>
-          <h4 className={styles.homehubOrange}>Homehub</h4>
-        </Link>
+      <Col xs={1} md={2}>
+        <div className={styles.footerIcon}>
+          <miscIcons.footerExplore />
+        </div>
       </Col>
-
-      <Col className="text-lg-right text-xl-right">
-        <Link href="/housing" undecorated>
-          <miscIcons.Logo />
-        </Link>
+      <Col className={styles.titleText} xs={9} md={8}>
+        <Subtitle2>Explore</Subtitle2>
+        <div className={styles.linkSection}>
+          <Link href="/" undecorated>
+            <div className={styles.childrenText}>Home</div>
+          </Link>
+          <Link href="/" undecorated>
+            <div className={styles.childrenText}>About Us</div>
+          </Link>
+          <Link href="/" undecorated>
+            <div className={styles.childrenText}>Careers</div>
+          </Link>
+        </div>
       </Col>
     </Row>
-
-    <div className={styles.ellipses}>
-      By students <miscIcons.ellipse /> For students <miscIcons.ellipse /> With
-      students
-    </div>
   </div>
 );
 
+const FourthColumn: FunctionComponent = () => (
+  <div className={cn(styles.marginBottomProvider)}>
+    <Row>
+      <Col xs={1} md={2}>
+        <div className={styles.footerIcon}>
+          <miscIcons.footerConnect />
+        </div>
+      </Col>
+      <Col className={styles.titleText} xs={9} md={8}>
+        <Subtitle2>Connect</Subtitle2>
+        <div className={styles.linkSection}>
+          <Link href="/" undecorated>
+            <div className={styles.childrenText}>Feedback</div>
+          </Link>
+          <Link href={`mailto:${homehubEmail}`} undecorated>
+            <div className={styles.childrenText}>Email</div>
+          </Link>
+          <Link href="/" undecorated>
+            <div className={styles.childrenText}>Instagram</div>
+          </Link>
+        </div>
+      </Col>
+    </Row>
+  </div>
+);
+
+const CopyRight: FunctionComponent = () => (
+  <div className={styles.copyRighttext}>
+    &copy; All rights reserved | Homehub 2021
+  </div>
+);
 /**
  * The footer of the website. No Props because there shouldn't
  * be any configuration necessary.
@@ -90,21 +124,28 @@ const ThirdColumn: FunctionComponent = () => (
 const Footer: FunctionComponent = () => (
   <footer>
     <div className={styles.wrapper}>
-      <Container className="m-0">
-        <Row>
-          <Col xs={6} md={3} className="mb-5 mb-md-0">
-            <FirstColumn />
-          </Col>
+      {/* <Container> */}
+      <Row>
+        <Col xs={12} md={{ offset: 0, span: 5 }} lg={{ offset: 1, span: 5 }}>
+          <FirstColumn />
+        </Col>
 
-          <Col xs={6} md={6} className="mb-5 mb-md-0">
-            <SecondColumn />
-          </Col>
+        <Col xs={12} md={2} lg={2}>
+          <SecondColumn />
+        </Col>
 
-          <Col xs={{ span: 8, offset: 2 }} md={{ span: 3, offset: 0 }}>
-            <ThirdColumn />
-          </Col>
-        </Row>
-      </Container>
+        <Col xs={12} md={2} lg={2}>
+          <ThirdColumn />
+        </Col>
+
+        <Col xs={12} md={2} lg={2}>
+          <FourthColumn />
+        </Col>
+      </Row>
+      {/* </Container> */}
+      <Row className={styles.copyRight}>
+        <CopyRight />
+      </Row>
     </div>
   </footer>
 );

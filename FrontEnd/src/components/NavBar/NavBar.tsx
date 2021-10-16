@@ -38,7 +38,7 @@ const NavBar: FunctionComponent = () => {
       <div className={styles.container}>
         <div className="mr-auto">
           <a href="/housing">
-            <landingIcons.logo className={styles.logo} />
+            <landingIcons.logo className={styles.giLogo} />
           </a>
         </div>
         <Row className="align-items-center">
@@ -58,19 +58,19 @@ const NavBar: FunctionComponent = () => {
               />
             </>
           ) : (
-            <>
-              <Link href="/about" undecorated>
-                <h5 className="mb-0">About</h5>
-              </Link>
-              <Button
-                size="secondary"
-                variant="solid"
-                onClick={() => dispatch(showLogin())}
-              >
-                Get Started
+              <>
+                <Link href="/about" undecorated>
+                  <h5 className="mb-0">About</h5>
+                </Link>
+                <Button
+                  size="secondary"
+                  variant="solid"
+                  onClick={() => dispatch(showLogin())}
+                >
+                  Get Started
               </Button>
-            </>
-          )}
+              </>
+            )}
         </Row>
       </div>
     </Navbar>

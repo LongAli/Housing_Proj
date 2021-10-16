@@ -1,11 +1,31 @@
 .wrapper {
-  width: 100%;
-  background-color: $primary-50-color;
-  padding: 3rem $entire-site-margin-x;
+  min-width: 100vw;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  // $entire-site-margin-x
   margin-top: $filter-top-margin;
 
   @include bp-down('sm') {
     padding: 3rem 0;
+  }
+}
+
+footer {
+  background-color: white;
+  @include bp-down('xs') {
+    padding-left: 2rem !important;
+  }
+  @include bp-down('sm') {
+    padding-left: 2rem !important;
+  }
+  @include bp-down('md') {
+    padding-left: 3rem !important;
+  }
+  @include bp-down('lg') {
+    padding-left: 2rem !important;
+  }
+  @include bp-up('xl') {
+    padding-left: 2rem !important;
   }
 }
 
@@ -14,31 +34,23 @@
   margin-bottom: 0.2rem;
 }
 
-.getStarted {
-  color: $primary-400-color !important;
-  text-align: left;
-}
+// .getStarted {
+//   color: $primary-400-color !important;
+//   text-align: left;
+// }
 
-.greyedOut {
+.copyRighttext {
   color: $disabled-low-emphasis-color;
-}
-
-.homehubOrange {
-  color: $primary-400-color;
-}
-
-.ellipses svg {
-  fill: $primary-100-color;
-  stroke: none;
-}
-
-.ellipses {
   @include font-type('body 5');
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
-.homehubLabel {
+.copyRight {
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-items: center;
 }
 
 .email {
@@ -47,4 +59,41 @@
 
 .childrenText {
   @include font-type('body 3');
+  padding-top: 0.3em;
+}
+.childrenText:hover {
+  text-decoration: underline;
+}
+
+.logoText {
+  color: $primary-300-color;
+  display: inline-block;
+  @include font-type('subtitle 5');
+  margin-right: 1em;
+}
+
+.logoTextWrap {
+  display: flex;
+  margin-top: 0.8rem;
+  margin-bottom: 3rem;
+}
+
+.titleText {
+  margin-top: 0.25rem;
+  margin-left: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.footerIcon {
+  @include svg-fill($primary-300-color, 2rem, 2rem);
+}
+
+.linkSection {
+  margin-top: 0.8rem;
 }
