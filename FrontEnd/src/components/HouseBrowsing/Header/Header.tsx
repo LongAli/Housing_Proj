@@ -1,16 +1,17 @@
-import React, { FunctionComponent } from 'react';
-import { filterIcons } from '@icons';
-import styles from './Header.module.scss';
-import cn from 'classnames';
-import { useDispatch } from 'react-redux';
 import { Button, Subtitle2 } from '@basics';
-import { showLogin, showPost } from '@redux';
 import { useUser } from '@hooks';
-import { Row, Col } from 'react-bootstrap';
+import { filterIcons } from '@icons';
+import { showLogin, showPost } from '@redux';
+import cn from 'classnames';
+import React, { FunctionComponent } from 'react';
+import { Col, Row } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import styles from './Header.module.scss';
 
 const Filter: FunctionComponent = () => {
   const { data: user } = useUser();
   const dispatch = useDispatch();
+
   return (
     <Row>
       <Col

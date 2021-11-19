@@ -18,43 +18,43 @@
 }
 
 .text {
-  color: rgb(46, 46, 46);
-  font-size: 1.25rem;
   margin-top: 3.2rem;
-  font-weight: 400;
   justify-content: center;
   text-align: center;
+
+  @include font-type('body 1');
 }
 
 .textLg {
-  color: rgb(46, 46, 46);
-  font-size: 2.125rem;
   justify-content: center;
+
+  @include font-type('h3');
 }
 
 .subtext {
   color: $primary-dark-color;
-  font-size: 1.25rem;
   justify-content: center;
   margin-bottom: 3.2rem;
   margin-top: 0.25rem;
   text-align: center;
+
+  @include font-type('body 2');
 }
 
 .subtextIntro {
-  color: rgb(46, 46, 46);
-  font-size: 1.25rem;
   justify-content: center;
   margin-bottom: 2rem;
   margin-top: 1rem;
+
   @include bp-up('lg') {
     max-width: 25rem;
   }
+
+  @include font-type('body 1');
 }
 
 .textSm {
-  color: rgb(46, 46, 46);
-  font-size: 1rem;
+  @include font-type('body 3');
 }
 
 .smallImg {
@@ -62,7 +62,7 @@
 }
 
 .buttonInner {
-  margin: inherit;
+  margin: inherit; // use parent's margin since they are the same by design
 }
 
 .buttonLink {
@@ -103,10 +103,10 @@
 }
 
 .logoText {
-  font-size: 3rem;
   color: $primary-light-color;
-  font-weight: $bold-font-weight;
   margin-left: 1rem;
+
+  @include font-type('h2');
 }
 
 .logo {

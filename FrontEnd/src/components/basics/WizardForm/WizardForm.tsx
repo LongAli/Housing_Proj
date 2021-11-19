@@ -1,10 +1,9 @@
-import React, { useEffect, useState, FunctionComponent } from 'react';
 import { Button, Modal } from '@basics';
-import { Icon } from '@icons';
-import { ZodSchema, ZodIssue } from 'zod';
-import { miscIcons } from '@icons';
-import styles from './WizardForm.module.scss';
+import { Icon, miscIcons } from '@icons';
 import cn from 'classnames';
+import React, { useEffect, useState } from 'react';
+import { ZodIssue, ZodSchema } from 'zod';
+import styles from './WizardForm.module.scss';
 
 export type ValidationError =
   | { success: true; error: undefined; data?: string }
@@ -57,9 +56,12 @@ interface WizardFormProps<T = {}> {
   schemas: ZodSchema<Partial<T>>[];
   lastButtonAsInactiveArrow?: boolean;
   lastButtonText?: string;
-  customModifierFuncs?: customModifierFunc<T>[]; // customized functions for overriding/adding fields to enable advanced validation behaviors like grouping
-  externalFunction?: (s: Partial<T>[]) => void; // external function for utilizing internal store and will be called during set store
-  cleanUpReset?: () => void; // must be provided to reset clean up
+  // External function for parent for utilizing internal store and will be called during set store.
+  parentOnStoreChange?: (s: Partial<T>[]) => void;
+  // External clean up function to be invoked when defined, e.g. when a post request succeeds.
+  // This also indicates the current store and index needs to be reset. 
+  // TODO: decouple this with default cleanup as well.
+  externalCleanUp?: () => void; 
 }
 
 // Not using FunctionComponent as a work around to allow for generics for Wizard Form. Do not do this normally.
@@ -78,9 +80,8 @@ const WizardForm = <T extends {}>({
   schemas,
   lastButtonAsInactiveArrow,
   lastButtonText = 'Submit',
-  customModifierFuncs,
-  externalFunction,
-  cleanUpReset,
+  parentOnStoreChange,
+  externalCleanUp,
 }: WizardFormProps<T>) => {
   const [curIndex, setCurIndex] = useState<number>(0);
   const [isFirst, setIsFirst] = useState<boolean>(true);
@@ -97,18 +98,18 @@ const WizardForm = <T extends {}>({
   >(children.map(() => undefined));
 
   useEffect(() => {
-    if (cleanUpReset) {
+    if (externalCleanUp) {
       setCompleteStore(initialStore);
       setCurIndex(0);
-      cleanUpReset();
+      externalCleanUp();
     }
-  }, [cleanUpReset]);
+  }, [externalCleanUp]);
 
   useEffect(() => {
     setCurStep(children[curIndex]);
     setIsFirst(curIndex === 0);
     setIsLast(curIndex === children.length - 1);
-  }, [curIndex, children, cleanUpReset]);
+  }, [curIndex, children]);
 
   /**
    * Use this to exit the wizard form without submitting.
@@ -139,23 +140,19 @@ const WizardForm = <T extends {}>({
    * @param schema is the schema used to validate toParse
    * @param toParse holds the values that should be validated/parsed
    * @param toValidate is an array of keys within toParse that should be validated/parsed
-   * @param currenIdx different from curindex which is current page, this is a separate value provided by the function consumer
-   * @param pageSwitch whether it is a page switch
+   * @param idxToValidate is the index of the page to validate
    * @returns
    */
   const validatePickedValues = <P extends Partial<T>>(
     schema: ZodSchema<P>,
     toParse: P,
     toValidate: Array<keyof P>,
-    currenIdx: number,
-    pageSwitch?: boolean,
+    idxToValidate: number,
   ): ValidationErrors<P> => {
     const parseResult = schema.safeParse(toParse);
-    const { success } = parseResult;
     const initialValidationErrors: ValidationErrors<P> = {
-      ...validations[currenIdx],
+      ...validations[idxToValidate],
     };
-
     // extractFirstError returns the first error from all the errors in a field `key` (if there are any errors in that field)
     const extractFirstError = (
       fieldErrors: { [k: string]: string[] },
@@ -172,31 +169,25 @@ const WizardForm = <T extends {}>({
       prevErrors: ValidationErrors<P>,
       curKey: keyof P,
     ): ValidationErrors<P> => {
-      // use parseResult.success instead of success because TypeScript can't compute discriminated unions from destructured values
-      const error = parseResult.success
-        ? undefined
-        : extractFirstError(parseResult.error.formErrors.fieldErrors, curKey);
-
-      return { ...prevErrors, [curKey]: { success, error } };
+      // Use parseResult.success instead of success because TypeScript can't compute discriminated unions from destructured values
+      let error;
+      if (!parseResult.success) {
+        const fieldError = extractFirstError(
+          parseResult.error.formErrors.fieldErrors,
+          curKey,
+        );
+        // This formError assumes there is only one refine check in the schema.
+        // Multiple schemas might need to be defined and merged for multiple refines.
+        const formError = parseResult.error.formErrors.formErrors[0];
+        error = fieldError || formError;
+      }
+      return { ...prevErrors, [curKey]: { success: !!!error, error } };
     };
 
     var validatedResults = toValidate.reduce(
       combineErrorsReducer,
       initialValidationErrors,
     );
-
-    if (customModifierFuncs && pageSwitch) {
-      const aggregatedFields = customModifierFuncs.reduce(
-        (prev, customFunc) => {
-          return {
-            ...prev,
-            ...customFunc(curIndex, success, toParse, validatedResults),
-          };
-        },
-        {},
-      );
-      validatedResults = { ...validatedResults, ...aggregatedFields };
-    }
 
     return validatedResults;
   };
@@ -213,7 +204,6 @@ const WizardForm = <T extends {}>({
       store[i],
       Object.keys(store[i]) as (keyof T)[],
       i,
-      true,
     );
 
     setValidations({
@@ -265,7 +255,6 @@ const WizardForm = <T extends {}>({
    */
   const nextStep = () => {
     const dataIsValid = validateCurrent();
-    // get rid of this later
     if (dataIsValid && curIndex + 1 < children.length) {
       setCurIndex(curIndex + 1);
     }
@@ -312,8 +301,8 @@ const WizardForm = <T extends {}>({
     const changedValues = { ...store[curIndex], ...value };
     setCompleteStore({ ...store, [curIndex]: changedValues });
 
-    if (externalFunction) {
-      externalFunction({ ...store, [curIndex]: changedValues });
+    if (parentOnStoreChange) {
+      parentOnStoreChange({ ...store, [curIndex]: changedValues });
     }
 
     // get the changed edited fields and set that they were changed

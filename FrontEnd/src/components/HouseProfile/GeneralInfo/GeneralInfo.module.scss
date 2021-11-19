@@ -13,14 +13,15 @@
 }
 
 .day {
-  color: #aaaaaa;
+  color: $disabled-low-emphasis-color;
   margin-bottom: 14px;
 }
 
 .name {
-  @include font-type('h3');
   color: $secondary-900-color;
   margin-bottom: 8px;
+
+  @include font-type('h3');
 }
 
 .address {
@@ -39,10 +40,11 @@
 }
 
 .priceCenterLink {
+  display: inline-block;
+
   a {
     @include font-type('body 1');
   }
-  display: inline-block;
 }
 
 .map {

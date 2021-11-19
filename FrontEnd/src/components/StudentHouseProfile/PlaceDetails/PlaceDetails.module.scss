@@ -14,7 +14,7 @@ $base-padding: 1rem;
 .amenities {
   display: flex;
   margin-top: 1rem;
-  margin-left: -0.9375rem;
+  margin-left: -$button-border-radius;
 
   div {
     padding-right: 0.5rem;

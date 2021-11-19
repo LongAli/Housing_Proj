@@ -1,45 +1,37 @@
-import React, { FunctionComponent, useState } from 'react';
-import { MakeAPost as MPIcons } from '@icons';
-import { getDurationInMinutes } from '@apis';
+import { generateHousingPost, getDurationInMinutes } from '@apis';
+import { WizardForm } from '@basics';
 import { StudentHousePostPreview } from '@components';
+import { useUser } from '@hooks';
+import { MakeAPost as MPIcons } from '@icons';
+import { StudentHousePost } from '@models';
+import { hidePost, setShowPostType, showPost, useShouldShowPost } from '@redux';
+import React, { FunctionComponent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSWRConfig } from 'swr';
-import { useShouldShowPost, hidePost, showPost, setShowPostType } from '@redux';
-import Page1, { Page1Store, page1InitialStore, page1Schema } from './Page1';
+import Page1, { page1InitialStore, page1Schema, Page1Store } from './Page1';
 import Page2, {
-  Page2Store,
   page2InitialStore,
   page2Schema,
-  zodRoomCapacityGroupSet,
+  Page2Store,
   roomCapacity,
 } from './Page2';
-import Page3, {
-  Page3Store,
-  page3InitialStore,
-  page3Schema,
-  zodAvailabilityGroupSet,
-} from './Page3';
-import Page4, { Page4Store, page4InitialStore, page4Schema } from './Page4';
+import Page3, { page3InitialStore, page3Schema, Page3Store } from './Page3';
+import Page4, { page4InitialStore, page4Schema, Page4Store } from './Page4';
 import Page5, {
-  Page5Store,
+  displayAmenities,
   page5InitialStore,
   page5Schema,
-  zodAmenityGroupSet,
-  displayAmenities,
+  Page5Store,
 } from './Page5';
 import Page6, {
-  Page6Store,
-  page6InitialStore,
-  page6Schema,
   genders,
   habits,
+  page6InitialStore,
+  page6Schema,
+  Page6Store,
 } from './Page6';
-import Page7, { Page7Store, page7InitialStore, page7Schema } from './Page7';
-import Page8, { Page8Store, page8InitialStore, page8Schema } from './Page8';
-import { StudentHousePost } from '@models';
-import { useUser } from '@hooks';
-import { generateHousingPost } from '@apis';
-import { WizardForm } from '@basics';
+import Page7, { page7InitialStore, page7Schema, Page7Store } from './Page7';
+import Page8, { page8InitialStore, page8Schema, Page8Store } from './Page8';
 import { SuccessPopUp } from './PopUps';
 export type Store = Page1Store &
   Page2Store &
@@ -137,17 +129,18 @@ const dataProcessHelper = async (
   };
 };
 
+const initialStoreArray = [
+  page1InitialStore,
+  page2InitialStore,
+  page3InitialStore,
+  page4InitialStore,
+  page5InitialStore,
+  page6InitialStore,
+  page7InitialStore,
+  page8InitialStore,
+];
+
 const MakeAPost: FunctionComponent = () => {
-  const initialStoreArray = [
-    page1InitialStore,
-    page2InitialStore,
-    page3InitialStore,
-    page4InitialStore,
-    page5InitialStore,
-    page6InitialStore,
-    page7InitialStore,
-    page8InitialStore,
-  ];
   const [showPreview, setShowPreview] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [cleanUp, setCleanUp] = useState<() => void>();
@@ -245,14 +238,9 @@ const MakeAPost: FunctionComponent = () => {
           MPIcons.Photo,
           MPIcons.Text,
         ]}
-        customModifierFuncs={[
-          zodRoomCapacityGroupSet,
-          zodAmenityGroupSet,
-          zodAvailabilityGroupSet,
-        ]}
-        externalFunction={(updatedStore) => setInitialStore(updatedStore)}
+        parentOnStoreChange={(updatedStore) => setInitialStore(updatedStore)}
         lastButtonText="Preview"
-        cleanUpReset={cleanUp}
+        externalCleanUp={cleanUp}
       >
         <Page1 />
         <Page2 />

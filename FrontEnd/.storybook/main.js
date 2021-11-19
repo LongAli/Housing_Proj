@@ -2,8 +2,8 @@ const toPath = require('../toPath');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
-  'stories': ['../src/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
-  'addons': [
+  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
+  addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     // Handle SCSS modules
@@ -13,8 +13,8 @@ module.exports = {
         cssLoaderOptions: {
           // Hashes the classNames to include the className itself
           modules: {
-            localIdentName: "[name]__[local]___[hash:base64:5]",
-        },
+            localIdentName: '[name]__[local]___[hash:base64:5]',
+          },
         },
         sassLoaderOptions: {
           sassOptions: {
@@ -37,14 +37,14 @@ module.exports = {
     config.resolve.plugins.push(
       new TsconfigPathsPlugin({
         configFile: toPath('tsconfig.json'),
-      })
+      }),
     );
     config.resolve.extensions.push('.ts', '.tsx');
 
     // SECTION: Needed for SVG importing using svgr
     // find index of the rule to handle SVG's
     const indexOfRuleToRemove = config.module.rules.findIndex(
-      (rule) => rule.test && rule.test.toString().includes('svg')
+      (rule) => rule.test && rule.test.toString().includes('svg'),
     );
 
     // replace that rule with a rule to load other files (use 'file-loader' package to do so)

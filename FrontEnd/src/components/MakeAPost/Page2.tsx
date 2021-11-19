@@ -1,27 +1,25 @@
-import React, { FunctionComponent } from 'react';
 import {
-  WizardFormStep,
-  ToggleGroup,
-  Tooltip,
+  Dropdown,
   RadioGroup,
   SetStore,
-  Dropdown,
   Subtitle2,
+  ToggleGroup,
+  Tooltip,
+  WizardFormStep,
 } from '@basics';
+import { NON_EMPTY_ERR_MSG } from '@constants';
 import { roomTypeIconsTemp } from '@icons';
-import cn from 'classnames';
 import { ArrayUnionTransform, TransformArray } from '@utils';
+import cn from 'classnames';
+import React, { FunctionComponent } from 'react';
 import * as z from 'zod';
 import styles from './Page.module.scss';
-import { NON_EMPTY_ERR_MSG } from '@constants';
-import { customModifierFunc } from '@basics';
 
 export const roomTypes = [
   'Master Bedroom',
   'Guest Bedroom',
   'Den',
   'Living Room',
-  'Other',
 ] as const;
 
 export const roomCapacity = ['Single', 'Double', 'Triple'] as const;
@@ -63,26 +61,6 @@ export const page2InitialStore: Page2Store = {
   lookingForCount: '',
 };
 
-export const zodRoomCapacityGroupSet: customModifierFunc<Page2Store> = (
-  curIndex: number,
-  success: boolean,
-  storeValues: Partial<Page2Store>,
-) => {
-  if (curIndex == 1) {
-    const error =
-      storeValues.Single || storeValues.Double || storeValues.Triple
-        ? undefined
-        : {
-            code: z.ZodIssueCode.custom,
-            path: [],
-            message: 'at least room capacity must be selected',
-          };
-    const result = { success, error };
-    return { Single: result, Double: result, Triple: result };
-  }
-  return {};
-};
-
 const people = Array.from({ length: 6 }, (_, i) => (i + 1).toString());
 
 interface PartProps {
@@ -116,9 +94,11 @@ const Part1: FunctionComponent<PartProps & { initialSelected: string[] }> = ({
         }))}
         className={styles.leftAlign}
         error={
-          validations?.Single?.error &&
-          validations?.Double?.error &&
-          validations?.Triple?.error
+          // Error UI should only be displayed when there is nothing selected in the current group and there is an zod error.
+          !!initialSelected &&
+          (validations?.Single?.error ||
+            validations?.Double?.error ||
+            validations?.Triple?.error)
         }
         onSelect={(newlySelected) => {
           setStore({ [newlySelected.label]: newlySelected.selected });

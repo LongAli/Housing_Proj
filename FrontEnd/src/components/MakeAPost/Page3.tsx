@@ -1,18 +1,17 @@
-import React, { FunctionComponent } from 'react';
 import {
-  WizardFormStep,
-  Tooltip,
-  SetStore,
-  Dropdown,
-  Subtitle2,
   DatePicker,
+  Dropdown,
+  SetStore,
+  Subtitle2,
+  Tooltip,
+  WizardFormStep,
 } from '@basics';
+import { NON_EMPTY_ERR_MSG } from '@constants';
 import cn from 'classnames';
+import moment from 'moment';
+import React, { FunctionComponent, useEffect, useRef } from 'react';
 import * as z from 'zod';
 import styles from './Page.module.scss';
-import { NON_EMPTY_ERR_MSG } from '@constants';
-import moment from 'moment';
-import { customModifierFunc } from '@basics';
 
 export type Page3Store = z.infer<typeof page3Schema>;
 
@@ -40,13 +39,22 @@ export const page3Schema = z
     startDate: z.string(),
     endDate: z.string(),
   })
-  .refine(
-    (data) =>
-      (month.indexOf(data.availMonth) <= month.indexOf(data.untilMonth) &&
-        parseInt(data.availYear) == parseInt(data.untilYear)) ||
-      parseInt(data.availYear) < parseInt(data.untilYear),
-    'Invalid month/year entered.',
-  );
+  .refine((data) => {
+    if (
+      !!data.availMonth &&
+      !!data.availYear &&
+      !!data.untilMonth &&
+      !!data.untilYear
+    ) {
+      return (
+        (month.indexOf(data.availMonth) <= month.indexOf(data.untilMonth) &&
+          parseInt(data.availYear) == parseInt(data.untilYear)) ||
+        parseInt(data.availYear) < parseInt(data.untilYear)
+      );
+    }
+    // Not all entries are filled.
+    return true;
+  }, 'Invalid month/year entered.');
 
 export const page3InitialStore: Page3Store = {
   availMonth: '',
@@ -69,117 +77,70 @@ const year = Array.from({ length: 5 }, (_, i) =>
   (new Date().getFullYear().valueOf() + i).toString(),
 );
 
-export const zodAvailabilityGroupSet: customModifierFunc<Page3Store> = (
-  curIndex: number,
-  success: boolean,
-  storeValues: Partial<Page3Store>,
-) => {
-  if (curIndex == 2) {
-    if (
-      storeValues.availMonth &&
-      storeValues.untilMonth &&
-      storeValues.availYear &&
-      storeValues.untilYear
-    ) {
-      if (
-        (month.indexOf(storeValues.availMonth) >
-          month.indexOf(storeValues.untilMonth) &&
-          parseInt(storeValues.availYear) == parseInt(storeValues.untilYear)) ||
-        parseInt(storeValues.availYear) > parseInt(storeValues.untilYear)
-      ) {
-        return {
-          invalid_month: {
-            success,
-            error: {
-              code: z.ZodIssueCode.custom,
-              path: [],
-              message: 'Invalid month entered.',
-            },
-          },
-          invalid_year: {
-            success,
-            error: {
-              code: z.ZodIssueCode.custom,
-              path: [],
-              message: 'Invalid year entered.',
-            },
-          },
-        };
-      }
-    }
-  }
-  return {
-    invalid_month: { success, error: undefined },
-    invalid_year: { success, error: undefined },
-  };
-};
-
 interface PartProps {
   setStore: SetStore<Page3Store>;
   validations?: any;
 }
 
+const combineErrors = (validations: any) =>
+  validations?.availMonth?.error ||
+  validations?.availYear?.error ||
+  validations?.untilMonth?.error ||
+  validations?.untilYear?.error;
+
 const Part1: FunctionComponent<
   PartProps & { selectedValues: Partial<Page3Store> }
-> = ({ setStore, validations, selectedValues }) => (
-  <div className={styles.section}>
-    <h5 className={styles.title}>
-      Available from <span className={styles.required}>*</span>
-    </h5>
-    <div className={cn('d-flex')}>
-      <Dropdown
-        options={month}
-        placeholder="--"
-        onSelect={(e) => setStore({ availMonth: e ? e : undefined })}
-        error={
-          validations?.availMonth?.error ||
-          validations?.invalid_month?.error?.message
-        }
-        initialSelected={selectedValues.availMonth}
-      ></Dropdown>
-      <Dropdown
-        options={year}
-        placeholder="--"
-        className={styles.small}
-        onSelect={(e) => setStore({ availYear: e ? e : undefined })}
-        error={
-          validations?.availYear?.error ||
-          validations?.invalid_year?.error?.message
-        }
-        initialSelected={selectedValues.availYear}
-      ></Dropdown>
-    </div>
-    <h5 className={cn(styles.body, styles.title2)}>
-      Until <span className={styles.required}>*</span>
-    </h5>
-    <div className={cn('d-flex', styles.test)}>
-      <Dropdown
-        options={month}
-        placeholder="--"
-        onSelect={(e) => setStore({ untilMonth: e ? e : undefined })}
-        error={
-          validations?.untilMonth?.error ||
-          validations?.invalid_month?.error?.message
-        }
-        initialSelected={
-          selectedValues.untilMonth || validations?.invalid_date?.error?.message
-        }
-      ></Dropdown>
-      <Dropdown
-        options={year}
-        placeholder="--"
-        className={styles.small}
-        onSelect={(e) => setStore({ untilYear: e ? e : undefined })}
-        error={
-          validations?.untilYear?.error ||
-          validations?.invalid_year?.error?.message
-        }
-        initialSelected={selectedValues.untilYear}
-      ></Dropdown>
-    </div>
-  </div>
-);
+> = ({ setStore, validations, selectedValues }) => {
+  const stayPeriodValidation = useRef<string | z.ZodIssue | undefined>(
+    combineErrors(validations),
+  );
 
+  useEffect(() => {
+    stayPeriodValidation.current = combineErrors(validations);
+  }, [validations]);
+
+  return (
+    <div className={styles.section}>
+      <h5 className={styles.title}>
+        Available from <span className={styles.required}>*</span>
+      </h5>
+      <div className={cn('d-flex')}>
+        <Dropdown
+          options={month}
+          placeholder="--"
+          onSelect={(e) => setStore({ availMonth: e ? e : undefined })}
+          initialSelected={selectedValues.availMonth}
+        ></Dropdown>
+        <Dropdown
+          options={year}
+          placeholder="--"
+          className={styles.small}
+          onSelect={(e) => setStore({ availYear: e ? e : undefined })}
+          initialSelected={selectedValues.availYear}
+        ></Dropdown>
+      </div>
+      <h5 className={cn(styles.body, styles.title2)}>
+        Until <span className={styles.required}>*</span>
+      </h5>
+      <div className={cn('d-flex', styles.test)}>
+        <Dropdown
+          options={month}
+          placeholder="--"
+          onSelect={(e) => setStore({ untilMonth: e ? e : undefined })}
+          initialSelected={selectedValues.untilMonth}
+        ></Dropdown>
+        <Dropdown
+          options={year}
+          placeholder="--"
+          className={styles.small}
+          onSelect={(e) => setStore({ untilYear: e ? e : undefined })}
+          error={stayPeriodValidation.current}
+          initialSelected={selectedValues.untilYear}
+        ></Dropdown>
+      </div>
+    </div>
+  );
+};
 const moveInInfo: string =
   'This is an optional input that can help renters know when they are able to move into the place.\n\n Click “Start” to open a calendar to select a range of dates.';
 const Part2: FunctionComponent<
@@ -187,8 +148,8 @@ const Part2: FunctionComponent<
 > = ({ setStore, selectedDates }) => (
   <div className={styles.lastSection}>
     <h5 className={cn(styles.title, styles.unbold)}>
-      (optional) Preferred{' '}
-      <span className={styles.bold}> move-in timeframe </span> for renters
+      Preferred <span className={styles.bold}> move-in timeframe </span> for
+      renters
       <span className={cn(styles.inline, styles.tooltipMargin)}>
         <Tooltip isSingleLine={false} title={moveInInfo}>
           <></>
@@ -222,7 +183,6 @@ const Page3: FunctionComponent<WizardFormStep<Page3Store>> = ({
   startDate = '',
   endDate = '',
 }) => {
-  console.log(JSON.stringify(validations));
   return (
     <div className={styles.pageHeight}>
       <Subtitle2 className={styles.subtitle2}>

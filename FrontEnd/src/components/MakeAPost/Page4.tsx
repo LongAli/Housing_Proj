@@ -53,7 +53,7 @@ const CostInput: FunctionComponent<InputProps> = ({
       error={validations?.[type]?.error}
       value={value}
     ></Input>
-    <span className={cn(styles.text)}>per month</span>
+    <span className={cn(styles.text)}>per month per person</span>
   </div>
 );
 
@@ -64,7 +64,7 @@ const Part1: FunctionComponent<PartProps & { rentCost: string }> = ({
 }) => (
   <div className={styles.section}>
     <h5 className={styles.title}>
-      What is the monthly rent for this room?{' '}
+      What is the monthly rent per person for this room?{' '}
       <span className={styles.required}>*</span>
     </h5>
     <CostInput
@@ -82,9 +82,13 @@ const Part2: FunctionComponent<PartProps & { utilityCost: string }> = ({
   utilityCost,
 }) => (
   <div className={styles.lastSection}>
-    <h5 className={styles.title}>
-      What is the monthly cost of utilities for this room?
+    <h5 className={styles.title3}>
+      What is the monthly cost of utilities per person for this room?
     </h5>
+    <h6 className={styles.title}>
+      (Utility cost could vary A LOT from ~$50 per person per month to $200 per
+      house per month)
+    </h6>
     <CostInput
       setStore={setStore}
       type="utilityCost"

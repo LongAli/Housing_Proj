@@ -18,9 +18,6 @@ const GeneralInfo: FunctionComponent<GeneralInfoProps> = ({
   const [copied, setCopy] = useState(false);
   return (
     <div className={styles.textPortion}>
-      <div className={styles.day}>
-        <miscIcons.RoundArrow /> 1 day ago
-      </div>
       <div className={styles.name}>{placeName}</div>
       <div className={styles.address}>
         <miscIcons.LocationIcon />

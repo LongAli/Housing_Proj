@@ -1,5 +1,5 @@
 .postButton {
-  border-radius: 0.9375rem;
+  border-radius: $button-border-radius;
   margin: 0;
   height: 100%;
   @include bp-down('md') {

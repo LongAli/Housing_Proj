@@ -66,8 +66,11 @@ const PlaceDetails: FunctionComponent<PlaceDetailsProps> = ({
       <Col className="mt-3 mt-md-0">
         {lookingForCount && (
           <>
-            <div className={styles.subtitle3}>#People to fill</div>
-            <Body2>{`Looking for ${lookingForCount} person/people to fill`}</Body2>
+            <div className={styles.subtitle3}># People to fill</div>
+            <Body2>
+              {lookingForCount +
+                (lookingForCount === '1' ? ' person' : ' people')}
+            </Body2>
           </>
         )}
       </Col>

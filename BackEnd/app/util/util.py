@@ -1,16 +1,17 @@
-from flask import jsonify, make_response
-from google.oauth2 import id_token
-from google.auth.transport import requests
-from google.auth.exceptions import GoogleAuthError
-from app.assets.request_message_map import *
-from werkzeug.exceptions import BadRequest
-from PIL import Image, UnidentifiedImageError
 import json
 import os
-from inflection import underscore
-from app.util.env_setup import set_google_cred
 import urllib.request
 from datetime import datetime
+
+from app.assets.request_message_map import *
+from app.util.env_setup import set_google_cred
+from flask import jsonify, make_response
+from google.auth.exceptions import GoogleAuthError
+from google.auth.transport import requests
+from google.oauth2 import id_token
+from inflection import underscore
+from PIL import Image, UnidentifiedImageError
+from werkzeug.exceptions import BadRequest
 
 
 def generate_response(elem={}, status_code=200):
@@ -297,7 +298,7 @@ def download_json_data(endpoint):
 def set_landlord_data(app, aws_landlord_endpoint):
     landlord_data = download_json_data(aws_landlord_endpoint)
     landlord_data.sort(key=lambda elem: datetime.now() if elem['availability'].lower(
-    ) in ["today", "now"] else datetime.strptime(elem['availability'], '%m/%d/%Y'))
+    ) in ["today", "now", "/"] else datetime.strptime(elem['availability'], '%m/%d/%Y'))
     app.config["LANDLORD_DB"] = landlord_data
 
 

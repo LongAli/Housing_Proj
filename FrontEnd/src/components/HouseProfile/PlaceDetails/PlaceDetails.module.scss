@@ -4,6 +4,7 @@
   margin: 0.75rem 0 1.5rem 0;
 
   @include font-type('subtitle 1');
+
   @include bp-up('md') {
     padding: 1rem 1.5rem;
   }

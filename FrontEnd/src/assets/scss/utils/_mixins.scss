@@ -42,11 +42,11 @@
     font-size: $xl-font-size;
     line-height: $xl-line-height;
   } @else if $type == 'h4' {
-    // notes: h4 and h5 are deprecated in the new versions, will be reserved for backward compatibility
-    // in the future they will be removed
+    @warn "h4 and h5 are deprecated in the new versions";
     font-weight: $bold-font-weight;
     font-size: $lg-font-size;
   } @else if $type == 'h5' {
+    @warn "h4 and h5 are deprecated in the new versions";
     font-weight: $bold-font-weight;
     font-size: $md-font-size;
   } @else if $type == 'subtitle 1' {

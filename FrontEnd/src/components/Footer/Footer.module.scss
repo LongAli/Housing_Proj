@@ -1,5 +1,6 @@
 .wrapper {
   min-width: 100vw;
+  background-color: white;
   padding-top: 3rem;
   padding-bottom: 3rem;
   // $entire-site-margin-x
@@ -7,25 +8,6 @@
 
   @include bp-down('sm') {
     padding: 3rem 0;
-  }
-}
-
-footer {
-  background-color: white;
-  @include bp-down('xs') {
-    padding-left: 2rem !important;
-  }
-  @include bp-down('sm') {
-    padding-left: 2rem !important;
-  }
-  @include bp-down('md') {
-    padding-left: 3rem !important;
-  }
-  @include bp-down('lg') {
-    padding-left: 2rem !important;
-  }
-  @include bp-up('xl') {
-    padding-left: 2rem !important;
   }
 }
 

@@ -1,14 +1,12 @@
-import React, { FunctionComponent, useState, useEffect } from 'react';
-import styles from './ApplicationDetails.module.scss';
-import styles_parent from '../HouseProfile.module.scss';
-import Row from 'react-bootstrap/Row';
+import { Body2, Link } from '@basics';
+import { useLandlordRoomData } from '@hooks';
+import React, { FunctionComponent } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-import { Subtitle1, Subtitle2, Body2, Link } from '@basics';
-import { profileIcons } from '@icons';
-import { useLandlordRoomData } from '@hooks';
-import { getDurationInMinutes } from '@apis';
+import Row from 'react-bootstrap/Row';
+import stylesParent from '../HouseProfile.module.scss';
 import SectionTitle from '../SectionTitle/SectionTitle';
+import styles from './ApplicationDetails.module.scss';
 import ProofOfIncome from './ProofOfIncome/ProofOfIncome';
 
 interface ApplicationDetailsProps {
@@ -68,7 +66,7 @@ const ApplicationDetails: FunctionComponent<ApplicationDetailsProps> = ({
   );
 
   return (
-    <Container className={styles_parent.container}>
+    <Container className={stylesParent.container}>
       <Row>
         <Col>
           <SectionTitle>To Apply</SectionTitle>

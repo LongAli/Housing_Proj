@@ -1,10 +1,10 @@
 .section {
   @include font-type('h5');
 
-  color: $primary-100-color;
+  color: $primary-800-color;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     border-bottom: 2px solid $primary-100-color; // This is the underline
     width: 100%;

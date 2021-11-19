@@ -34,7 +34,7 @@ export const amenityToIcon = {
   'Pool Tables': amenityIcons.Pool,
   'Common Space': amenityIcons.SharedCommonSpace,
   'Smoke Free': amenityIcons.SmokeFree,
-  'Common Area': amenityIcons.SharedCommonSpace,
+  'Living Room': amenityIcons.SharedCommonSpace,
   'No Smoking': amenityIcons.SmokeFree,
   'Swimming Pool': amenityIcons.SwimmingPool,
   'Tennis Courts': amenityIcons.TennisCourt,

@@ -1,23 +1,20 @@
-import React, { FunctionComponent, useState } from 'react';
-import { Modal, Button, Input } from '@basics';
-import { useDispatch } from 'react-redux';
+import { sendEmail } from '@apis';
+import { Button, Input, Modal } from '@basics';
+import { contactIcons, miscIcons } from '@icons';
 import {
-  useShowReportIssue,
   hideReportIssue,
   showEmailConfirmation,
+  useShowReportIssue,
   useThunkDispatch,
 } from '@redux';
-import { contactIcons, miscIcons } from '@icons';
-import styles from './AfterReportIssue.module.scss';
-import * as z from 'zod';
-import { sendEmail } from '@apis';
 import cn from 'classnames';
+import React, { FunctionComponent, useState } from 'react';
+import * as z from 'zod';
+import styles from './AfterReportIssue.module.scss';
 
 const e = z.string().email('Email is not in a valid format.');
 
-const TritonPng: FunctionComponent = () => (
-  <img src={miscIcons.tritonPng}></img>
-);
+const TritonPng: FunctionComponent = () => <img src={miscIcons.tritonPng} />;
 
 const AfterReportIssue: FunctionComponent = () => {
   const dispatch = useThunkDispatch();

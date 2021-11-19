@@ -1,21 +1,21 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
 import { SlideShow, Subtitle1 } from '@basics';
-import { formatHouseCardRent, formatAvail, formatUrlsWithAws } from '@utils';
 import { useLandlordRoomData, useStudentRoomData } from '@hooks';
-import styles from './HouseCard.module.scss';
 import { miscIcons } from '@icons';
 import { LandlordHousePost, StudentHousePostConsume } from '@models';
+import { formatAvail, formatHouseCardRent, formatUrlsWithAws } from '@utils';
+import React, { FunctionComponent } from 'react';
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import styles from './HouseCard.module.scss';
 
 interface Props {
   roomId: number;
 }
 
-interface RightTxtColumnProps {
-  onClick: () => void;
+interface RightTxtColumnProps
+  extends Pick<React.HTMLAttributes<HTMLDivElement>, 'onClick'> {
   distance: string;
   address: string;
   roomType: string;

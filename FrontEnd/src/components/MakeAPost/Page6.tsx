@@ -5,12 +5,7 @@ import { TransformArray } from '@utils';
 import { WizardFormStep, SetStore, CheckBoxGroup, Subtitle2 } from '@basics';
 import cn from 'classnames';
 
-export const genders = [
-  'Inclusive',
-  'Prefer female',
-  'Prefer male',
-  'No preference',
-] as const;
+export const genders = ['Prefer female', 'Prefer male', 'Anyone'] as const;
 
 export const habits = [
   'Clean',
@@ -18,7 +13,7 @@ export const habits = [
   'No Drinking',
   'No Party',
   '420 Friendly',
-  'Overnight Guest Ok',
+  'Overnight Guest OK',
 ] as const;
 
 export type genderStore = TransformArray<typeof genders, boolean>;

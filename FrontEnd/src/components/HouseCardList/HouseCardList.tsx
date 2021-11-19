@@ -1,29 +1,31 @@
+import { useLandlordRoomIds, useStudentRoomIds } from '@hooks';
+import { loading } from '@icons';
 import React, { FunctionComponent } from 'react';
+import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import { loading } from '@icons';
 import { HouseCardLandLord, HouseCardStudent } from './HouseCard';
-import { useLandlordRoomIds, useStudentRoomIds } from '@hooks';
 import styles from './HouseCardList.module.scss';
-import { useShowPostType } from '@redux';
 
-export type postingType = 'landlord' | 'student';
+export type PostingType = 'landlord' | 'student';
 
-const HouseCardListUI: FunctionComponent<{
+interface HouseCardListUIProps {
   roomIds: number[];
-  postType: postingType;
-}> = ({ roomIds, postType }) => {
+  postType: PostingType;
+}
+
+const HouseCardListUI: FunctionComponent<HouseCardListUIProps> = ({
+  roomIds,
+  postType,
+}) => {
+  const HouseCard =
+    postType === 'student' ? HouseCardStudent : HouseCardLandLord;
   return (
     <Container fluid className="px-md-0">
       <Row className={styles.cardRow}>
         {roomIds.map((roomId) => (
           <Col xs={12} lg={6} className="mb-5">
-            {postType === 'student' ? (
-              <HouseCardStudent roomId={roomId} />
-            ) : (
-              <HouseCardLandLord roomId={roomId} />
-            )}
+            <HouseCard roomId={roomId} />
           </Col>
         ))}
       </Row>
@@ -57,7 +59,7 @@ export const BrowsingStudentList: FunctionComponent = () => {
   return <HouseCardListUI roomIds={roomIds} postType="student" />;
 };
 
-const BrowsingList: FunctionComponent<{ postType: postingType }> = ({
+const BrowsingList: FunctionComponent<{ postType: PostingType }> = ({
   postType,
 }) => {
   return (

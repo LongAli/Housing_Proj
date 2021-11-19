@@ -23,7 +23,7 @@ const Page7: FunctionComponent<
     <Subtitle2 className={styles.subtitle2}>Pictures</Subtitle2>
     <div className="mb-2">
       <Subtitle2 className={cn(styles.subtitle2, styles.sectionSubtitle2)}>
-        Please upload pictures of the listing{' '}
+        Please upload 2 - 6 images for the listing{' '}
         <span className={styles.required}>*</span>
       </Subtitle2>
     </div>

@@ -1,10 +1,10 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PostingType } from '@components';
 import { useSelector } from '@redux';
-import { postingType } from '@components';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface PostState {
   shouldShowPost: boolean;
-  showPostType: postingType;
+  showPostType: PostingType;
 }
 
 const initialState: PostState = {
@@ -26,7 +26,7 @@ export const postSlice = createSlice({
     hidePost: (state) => {
       state.shouldShowPost = false;
     },
-    setShowPostType: (state, action: PayloadAction<postingType>) => {
+    setShowPostType: (state, action: PayloadAction<PostingType>) => {
       state.showPostType = action.payload;
     },
   },

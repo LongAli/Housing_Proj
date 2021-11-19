@@ -15,15 +15,16 @@
   width: 13.25rem;
   height: 12.1875rem;
   background-image: url('../../../assets/icons/makeAPost/postwindow.svg');
+
   @include bp-down('md') {
     margin: auto;
   }
 }
 
 .postButton {
-  border: 0.1875rem solid #e7946d;
+  border: 0.1875rem solid $primary-300-color;
   box-sizing: border-box;
-  border-radius: 0.9375rem;
+  border-radius: $button-border-radius;
   margin: 0;
 }
 
@@ -34,6 +35,7 @@
 .subtitle3 {
   padding-top: 3.6875rem;
   margin-bottom: 1rem;
-  @include font-type('subtitle 3');
   color: $primary-500-color;
+
+  @include font-type('subtitle 3');
 }

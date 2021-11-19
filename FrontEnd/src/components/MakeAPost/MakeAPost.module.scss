@@ -1,14 +1,13 @@
 .supportText {
-  @include font-type('body 3');
   margin-top: 0.5rem;
   text-align-last: center;
+
+  @include font-type('body 3');
 }
 
-.modalWrapper {
-  > div:first-child {
-    background-color: $secondary-900-color !important;
-    opacity: 0.2;
-  }
+.modalWrapper > div:first-child {
+  background-color: $secondary-900-color !important;
+  opacity: 0.2;
 }
 
 .modal {
@@ -21,6 +20,6 @@
 }
 
 .modalButton {
-  border-radius: 0.9375rem;
+  border-radius: $button-border-radius;
   padding: 0.75rem 1.5rem;
 }
