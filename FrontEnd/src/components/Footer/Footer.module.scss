@@ -3,7 +3,6 @@
   background-color: white;
   padding-top: 3rem;
   padding-bottom: 3rem;
-  // $entire-site-margin-x
   margin-top: $filter-top-margin;
 
   @include bp-down('sm') {
@@ -16,10 +15,24 @@
   margin-bottom: 0.2rem;
 }
 
-// .getStarted {
-//   color: $primary-400-color !important;
-//   text-align: left;
-// }
+.footer {
+  background-color: white;
+  @include bp-down('xs') {
+    padding-left: 2rem;
+  }
+  @include bp-down('sm') {
+    padding-left: 2rem;
+  }
+  @include bp-down('md') {
+    padding-left: 3rem;
+  }
+  @include bp-down('lg') {
+    padding-left: 2rem;
+  }
+  @include bp-up('xl') {
+    padding-left: 2rem;
+  }
+}
 
 .copyRighttext {
   color: $disabled-low-emphasis-color;
@@ -78,8 +91,4 @@
 
 .linkSection {
   margin-top: 0.8rem;
-}
-
-.childrenText {
-  @include font-type('body 3');
 }

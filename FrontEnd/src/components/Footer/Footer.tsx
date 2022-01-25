@@ -26,14 +26,6 @@ const FirstColumn: FunctionComponent = () => {
 
 const homehubEmail = 'homehubdope@gmail.com';
 
-// const Email = () => (
-//   <Link href={`mailto:${homehubEmail}`} external undecorated>
-//     <div className={cn(styles.greyedOut, styles.email, styles.childrenText)}>
-//       {homehubEmail}
-//     </div>
-//   </Link>
-// );
-
 const SecondColumn: FunctionComponent = () => (
   <div className={styles.marginBottomProvider}>
     <Row>
@@ -46,13 +38,7 @@ const SecondColumn: FunctionComponent = () => (
         <Subtitle2>Start</Subtitle2>
         <div className={styles.linkSection}>
           <Link href="/" undecorated>
-            <div className={styles.childrenText}>Make a Post</div>
-          </Link>
-          <Link href={`mailto:${homehubEmail}`} undecorated>
-            <div className={styles.childrenText}>Sign Up</div>
-          </Link>
-          <Link href="/" undecorated>
-            <div className={styles.childrenText}>LogIn</div>
+            <div className={styles.childrenText}>Home</div>
           </Link>
         </div>
       </Col>
@@ -71,13 +57,14 @@ const ThirdColumn: FunctionComponent = () => (
       <Col className={styles.titleText} xs={9} md={8}>
         <Subtitle2>Explore</Subtitle2>
         <div className={styles.linkSection}>
-          <Link href="/" undecorated>
-            <div className={styles.childrenText}>Home</div>
-          </Link>
-          <Link href="/" undecorated>
+          <Link href="/about" undecorated>
             <div className={styles.childrenText}>About Us</div>
           </Link>
-          <Link href="/" undecorated>
+          <Link
+            external
+            href="https://docs.google.com/document/d/1SpX8jEUbn7z77oRPYZTIaw8ZR8wTqfi5U0lQ-THEK-g/edit?usp=sharing"
+            undecorated
+          >
             <div className={styles.childrenText}>Careers</div>
           </Link>
         </div>
@@ -97,14 +84,8 @@ const FourthColumn: FunctionComponent = () => (
       <Col className={styles.titleText} xs={9} md={8}>
         <Subtitle2>Connect</Subtitle2>
         <div className={styles.linkSection}>
-          <Link href="/" undecorated>
-            <div className={styles.childrenText}>Feedback</div>
-          </Link>
           <Link href={`mailto:${homehubEmail}`} undecorated>
             <div className={styles.childrenText}>Email</div>
-          </Link>
-          <Link href="/" undecorated>
-            <div className={styles.childrenText}>Instagram</div>
           </Link>
         </div>
       </Col>
@@ -122,9 +103,8 @@ const CopyRight: FunctionComponent = () => (
  * be any configuration necessary.
  */
 const Footer: FunctionComponent = () => (
-  <footer>
+  <footer className={styles.footer}>
     <div className={styles.wrapper}>
-      {/* <Container> */}
       <Row>
         <Col xs={12} md={{ offset: 0, span: 5 }} lg={{ offset: 1, span: 5 }}>
           <FirstColumn />
@@ -142,7 +122,6 @@ const Footer: FunctionComponent = () => (
           <FourthColumn />
         </Col>
       </Row>
-      {/* </Container> */}
       <Row className={styles.copyRight}>
         <CopyRight />
       </Row>
