@@ -131,7 +131,7 @@
 }
 
 @mixin rounded-pill-shape {
-  border-radius: 5000rem; // overloading border-radius results in a "pill like" shape
+  border-radius: 10px; // overloading border-radius results in a "pill like" shape
 }
 
 // NOTE: width and height must be the same for this to be circular

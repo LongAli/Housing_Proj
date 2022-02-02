@@ -44,11 +44,11 @@ $growth-factor: 1.15;
 }
 
 .primary {
-  font-size: $lg-font-size;
+  @include font-type('subtitle 1');
 }
 
 .secondary {
-  font-size: $md-font-size;
+  @include font-type('subtitle 2');
 }
 
 /* VARIANTS */
