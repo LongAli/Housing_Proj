@@ -49,6 +49,8 @@ const HomehubWelcomeInfo: FunctionComponent = () => {
 };
 
 const HomePageCard: FunctionComponent = () => {
+  const router = useRouter();
+
   return (
     <Row className={styles.homePageCardRow}>
       <Col md={12} lg={5} className={styles.homePageCardCol}>
@@ -91,7 +93,13 @@ const HomePageCard: FunctionComponent = () => {
                 your criteria
               </div>
             </div>
-            <Button>Explore listings</Button>
+            <Button
+              size="primary"
+              variant="solid"
+              onClick={() => router.push('/housing')}
+            >
+              Explore listings
+            </Button>
           </div>
         </div>
       </Col>
@@ -134,8 +142,9 @@ const PostYourPlace: FunctionComponent = () => {
       >
         <div
           className={cn(styles.postStepLargeScreenDescription, {
-            [styles.postStepLargeScreenDescriptionActive]:
-              isCurrentStep(stepNumber),
+            [styles.postStepLargeScreenDescriptionActive]: isCurrentStep(
+              stepNumber,
+            ),
           })}
         >
           <span
@@ -184,10 +193,16 @@ const LogIn: FunctionComponent = () => {
   const { data: user } = useUser();
   const dispatch = useDispatch();
   const [loginMoved, setLoginMoved] = useState(false);
-  const [windowHeight, elementDistanceToTop] =
-    useViewPortDistance('#loginFrame');
+  const [logInCol, setlogInCol] = useState(7);
+  const [windowHeight, elementDistanceToTop] = useViewPortDistance(
+    '#loginFrame',
+  );
 
   useEffect(() => {
+    if (user.isLoggedIn) {
+      setlogInCol(12);
+    }
+
     if (
       windowHeight &&
       elementDistanceToTop &&
@@ -198,35 +213,65 @@ const LogIn: FunctionComponent = () => {
   }, [windowHeight, elementDistanceToTop]);
 
   return (
-    <div className={styles.loginWrapper}>
-      <div className={styles.loginDescriptionWrapper}>
-        <div className={styles.bearlMessageWrapper}>
-          <FilledImage src={landingLogin.Bearl} className={styles.bearlImage} />
+    <div className={styles.loginSession}>
+      <Row>
+        <Col
+          xs={{ span: 5, order: 'last' }}
+          lg={{ offset: 1, span: 2, order: 'first' }}
+        >
+          <FilledImage
+            alt={`Sun God Image`}
+            src={landingIcons.SunGod}
+            className={styles.sunGod}
+          />
+        </Col>
+
+        <Col
+          xs={{ span: 12, order: 'first' }}
+          lg={8}
+          className={styles.bearText}
+        >
+          <Row>
+            <Col xs={{ offset: 9, span: 2 }}>
+              <FilledImage
+                alt={`Bear Image`}
+                src={landingIcons.Bear}
+                className={styles.bearImage}
+              />
+            </Col>
+          </Row>
+
           <div
             className={cn(styles.loginFrame, {
               [styles.loginFrameMoved]: loginMoved,
             })}
             id="loginFrame"
           >
-            <Body2 className={styles.loginText}>
-              Homehub requests a
-              <span className="font-weight-bold"> UCSD email</span> to ensure
-              the authenticity of people signing up!
-            </Body2>
-            {/* also move sungod when logged in */}
-            {!user.isLoggedIn && (
-              <Button
-                className={styles.postButton}
-                icon={{ icon: miscIcons.GoogleLogo }}
-                onClick={() => dispatch(showLogin())}
-              >
-                <Subtitle2> Start with school account</Subtitle2>
-              </Button>
-            )}
+            <Row>
+              <Col className={styles.loginText} md={logInCol} xs={12}>
+                <Body2>
+                  Homehub requests a
+                  <span className="font-weight-bold"> UCSD email</span> to
+                  ensure the authenticity of people signing up!
+                </Body2>
+              </Col>
+              {!user.isLoggedIn && (
+                <Col md={5} xs={12}>
+                  <Button
+                    size="primary"
+                    variant="solid"
+                    icon={{ icon: miscIcons.GoogleLogo }}
+                    onClick={() => dispatch(showLogin())}
+                    className={styles.loginButton}
+                  >
+                    Start with school account
+                  </Button>
+                </Col>
+              )}
+            </Row>
           </div>
-        </div>
-      </div>
-      <FilledImage src={landingLogin.SunGod} className={styles.sunGodImage} />
+        </Col>
+      </Row>
     </div>
   );
 };

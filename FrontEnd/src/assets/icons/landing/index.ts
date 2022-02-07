@@ -9,3 +9,5 @@ export { default as cardHouse } from './cardHouse.png';
 export { default as cardPeople } from './cardPeople.png';
 export { default as backgroundHouse } from './background-house.svg';
 export { default as ourMission } from './our-mission.png';
+export { default as SunGod } from './SunGod.png';
+export { default as Bear } from './Bear.png';

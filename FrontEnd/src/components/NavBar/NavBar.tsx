@@ -58,11 +58,15 @@ const NavBar: FunctionComponent = () => {
             </>
           ) : (
             <>
-              <Link href="/about" undecorated>
-                <h5 className="mb-0">About</h5>
-              </Link>
               <Button
-                size="secondary"
+                size="primary"
+                variant="wrapper"
+                onClick={() => router.push('/about')}
+              >
+                About
+              </Button>
+              <Button
+                size="primary"
                 variant="solid"
                 onClick={() => dispatch(showLogin())}
               >

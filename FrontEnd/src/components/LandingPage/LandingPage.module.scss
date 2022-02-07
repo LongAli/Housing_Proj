@@ -2,6 +2,7 @@
   background-color: white;
 }
 
+//Top banner
 .banner {
   padding-top: 10rem;
   width: 100%;
@@ -62,6 +63,7 @@
   position: absolute;
 }
 
+//Homepage card
 div.homePageCardRow {
   max-width: 1500px;
   width: 80vw;
@@ -151,6 +153,7 @@ div.homePageCardRow {
   @include font-type('subtitle 1');
 }
 
+//post place stepper
 .postPlace {
   position: relative;
   margin-top: 10rem;
@@ -289,6 +292,7 @@ div.homePageCardRow {
   }
 }
 
+//our mission
 div.ourMissonWrapper {
   margin-top: 5rem;
   padding-left: 8vw;
@@ -358,23 +362,36 @@ div.ourMissonWrapper {
   }
 }
 
-.loginWrapper {
-  margin-top: 7.5rem;
-  margin-left: 7.5rem;
+//loginSession
+.loginSession {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1800px;
+  margin-top: 9.5rem;
+  // display: flex;
+  // justify-content: center;
 }
 
-.loginDescriptionWrapper {
-  display: flex;
-  justify-content: center;
+.sunGod {
+  min-height: 350px;
+  max-height: 400px;
+  background-size: contain;
+  margin-top: 2rem;
 }
 
-.bearlMessageWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
+.bearImage {
+  margin-top: -3rem;
+  min-height: 150px;
+  max-height: 250px;
+  background-size: contain;
+
+  @include bp-down('md') {
+    width: 0;
+    height: 0;
+  }
 }
 
+//login animation - scroll up
 .loginFrame {
   display: flex;
   align-items: center;
@@ -382,14 +399,15 @@ div.ourMissonWrapper {
   position: absolute;
 
   width: fit-content;
+  max-width: 1440px;
 
   border-style: solid;
   border-width: thin;
   border-color: $border-color;
   border-radius: 0.5rem 0.5rem 0.5rem 0;
+  background-color: rgba(255, 255, 255, 0.5);
 
   padding: 2rem;
-  margin-top: 2rem;
 
   transition: all 3s;
 
@@ -400,30 +418,31 @@ div.ourMissonWrapper {
   @include absCenter {
     top: 100%;
   }
-}
 
-.loginText {
-  width: 29rem;
-  color: $primary-400-color;
-
-  @include bp-up('lg') {
-    width: 40rem;
+  @include bp-down('lg') {
+    margin-right: 3rem;
   }
 }
 
-.bearlImage {
-  width: 5.875rem;
-  height: 6.5rem;
-  background-size: contain;
-  align-self: flex-end;
+.loginText {
+  display: flex;
+  align-items: center;
+  color: $primary-400-color;
 }
 
-.sunGodImage {
-  width: 12.1875rem;
-  height: 13.625rem;
-  background-size: contain;
+.loginButton {
+  margin: 0;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+
+  @include bp-down('sm') {
+    margin-top: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
 }
 
+//looking for a place
 .findHeading {
   text-align: center;
 

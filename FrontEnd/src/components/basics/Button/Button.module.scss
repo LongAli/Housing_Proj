@@ -1,5 +1,5 @@
 .button {
-  @include rounded-pill-shape;
+  @include rounded-button-shape;
 
   padding: (0.75rem - $default-border-width) (1.5rem - $default-border-width);
   margin: 0.5rem 1.5rem;
@@ -44,11 +44,11 @@ $growth-factor: 1.15;
 }
 
 .primary {
-  @include font-type('subtitle 1');
+  @include font-type('subtitle 2');
 }
 
 .secondary {
-  @include font-type('subtitle 2');
+  @include font-type('subtitle 3');
 }
 
 /* VARIANTS */
