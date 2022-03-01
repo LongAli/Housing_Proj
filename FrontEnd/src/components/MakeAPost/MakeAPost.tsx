@@ -18,16 +18,13 @@ import Page5, {
   page5Schema,
   Page5Store,
 } from './Page5';
-import Page6, {
-  page6InitialStore,
-  page6Schema,
-  Page6Store,
-} from './Page6';
+import Page6, { page6InitialStore, page6Schema, Page6Store } from './Page6';
 import Page7, { page7InitialStore, page7Schema, Page7Store } from './Page7';
 import Page8, { page8InitialStore, page8Schema, Page8Store } from './Page8';
 import { SuccessPopUp } from './PopUps';
 import { roomCapacities as rCapacities, habits } from '@constants';
-import { QuitPopUp } from './PopUps';
+import { QuitPopUp, MakeAPostMobile } from './PopUps';
+import useBreakpoints from 'use-window-width-breakpoints';
 
 export type Store = Page1Store &
   Page2Store &
@@ -140,17 +137,20 @@ const MakeAPost: FunctionComponent = () => {
   const [showPreview, setShowPreview] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showQuit, setShowQuit] = useState(false);
+
   const [cleanUp, setCleanUp] = useState<() => void>();
   const [previewData, setPreviewData] = useState<StudentHousePost>();
   // Mirrors whatever inside wizard form.
-  const [postStore, setPostStore] =
-    useState<Partial<Store>[]>(initialStoreArray);
+  const [postStore, setPostStore] = useState<Partial<Store>[]>(
+    initialStoreArray,
+  );
 
   const dispatch = useDispatch();
   const ShouldShowPost = useShouldShowPost();
   const { mutate } = useStudentRoomIds();
 
   const { data: user } = useUser();
+  const breakpoint = useBreakpoints();
 
   // isLoggedIn should always be true. It is used for ts requirement.
   if (!user.isLoggedIn) {
@@ -180,89 +180,98 @@ const MakeAPost: FunctionComponent = () => {
 
   return (
     <>
-      <QuitPopUp
-        open={showQuit}
-        onClose={() => setShowQuit(false)}
-        onQuit={() => dispatch(hidePost())}
-      />
-
-      <SuccessPopUp
-        open={showSuccess}
-        onClose={() => {
-          setShowSuccess(false);
-        }}
-      />
-
-      {showPreview &&
-        previewData && ( // need the preview data to be processed
-          <StudentHousePostPreview
-            post={postFunction}
-            onSuccess={async () => {
-              setShowPreview(false);
-              setShowSuccess(true);
-              // Cleans up the form
-              setPostStore(initialStoreArray);
-              setPreviewData(undefined);
-              // Sets the cleanUp function when posting succeeds. The syntax is required by React Hook.
-              setCleanUp(() => () => setCleanUp(undefined));
-              dispatch(setShowPostType('student'));
-              await mutate();
-            }}
-            onEdit={() => {
-              setShowPreview(false); // normally this isn't a problem, but we could use useEffect if there is
-              dispatch(showPost());
-            }}
-            {...previewData}
+      {breakpoint.down.md ? (
+        <MakeAPostMobile
+          open={ShouldShowPost}
+          onClose={() => dispatch(hidePost())}
+        />
+      ) : (
+        <>
+          <QuitPopUp
+            open={showQuit}
+            onClose={() => setShowQuit(false)}
+            onQuit={() => dispatch(hidePost())}
           />
-        )}
 
-      <WizardForm<Store>
-        show={ShouldShowPost}
-        onHide={() => setShowQuit(true)}
-        onSubmit={async (data) => {
-          setShowPreview(true);
-          const post = await dataProcessHelper({
-            ...data,
-            ...{
-              major,
-              schoolYear,
-              userName,
-              userEmail,
-              userPhone,
-              userPhoto,
-              userBio,
-            },
-          });
-          dispatch(hidePost());
-          setPreviewData(post);
-          return true;
-        }}
-        title="Make A Post"
-        initialStore={postStore}
-        schemas={schemas}
-        pageNavigationIcons={[
-          MPIcons.Amenity,
-          MPIcons.Bed,
-          MPIcons.Calendar,
-          MPIcons.Dollar,
-          MPIcons.Amenity,
-          MPIcons.Search,
-          MPIcons.Photo,
-          MPIcons.Text,
-        ]}
-        parentOnStoreChange={(updatedStore) => setPostStore(updatedStore)}
-        lastButtonText="Preview"
-        externalCleanUp={cleanUp}
-      >
-        <Page1 />
-        <Page2 />
-        <Page3 />
-        <Page4 />
-        <Page5 />
-        <Page6 />
-        <Page7 />
-        <Page8 />
-      </WizardForm>
+          <SuccessPopUp
+            open={showSuccess}
+            onClose={() => {
+              setShowSuccess(false);
+            }}
+          />
+
+          {showPreview &&
+            previewData && ( // need the preview data to be processed
+              <StudentHousePostPreview
+                post={postFunction}
+                onSuccess={async () => {
+                  setShowPreview(false);
+                  setShowSuccess(true);
+                  // Cleans up the form
+                  setPostStore(initialStoreArray);
+                  setPreviewData(undefined);
+                  // Sets the cleanUp function when posting succeeds. The syntax is required by React Hook.
+                  setCleanUp(() => () => setCleanUp(undefined));
+                  dispatch(setShowPostType('student'));
+                  await mutate();
+                }}
+                onEdit={() => {
+                  setShowPreview(false); // normally this isn't a problem, but we could use useEffect if there is
+                  dispatch(showPost());
+                }}
+                {...previewData}
+              />
+            )}
+
+          <WizardForm<Store>
+            show={ShouldShowPost}
+            onHide={() => setShowQuit(true)}
+            onSubmit={async (data) => {
+              setShowPreview(true);
+              const post = await dataProcessHelper({
+                ...data,
+                ...{
+                  major,
+                  schoolYear,
+                  userName,
+                  userEmail,
+                  userPhone,
+                  userPhoto,
+                  userBio,
+                },
+              });
+              dispatch(hidePost());
+              setPreviewData(post);
+              return true;
+            }}
+            title="Make A Post"
+            initialStore={postStore}
+            schemas={schemas}
+            pageNavigationIcons={[
+              MPIcons.Amenity,
+              MPIcons.Bed,
+              MPIcons.Calendar,
+              MPIcons.Dollar,
+              MPIcons.Amenity,
+              MPIcons.Search,
+              MPIcons.Photo,
+              MPIcons.Text,
+            ]}
+            parentOnStoreChange={(updatedStore) => setPostStore(updatedStore)}
+            lastButtonText="Preview"
+            externalCleanUp={cleanUp}
+          >
+            <Page1 />
+            <Page2 />
+            <Page3 />
+            <Page4 />
+            <Page5 />
+            <Page6 />
+            <Page7 />
+            <Page8 />
+          </WizardForm>
+        </>
+      )}
     </>
   );
 };

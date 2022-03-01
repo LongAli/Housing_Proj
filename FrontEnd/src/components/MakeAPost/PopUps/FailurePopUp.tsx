@@ -20,7 +20,7 @@ const FailurePopUp: FunctionComponent<FailurePopUpProps> = ({
     className={styles.modal}
     parentClassName={styles.failModelWrapper}
     ModalGraphic={{
-      src: MakeAPost.FailPost,
+      icon: MakeAPost.FailPost,
       alt: 'Failed to post',
     }}
   >
@@ -36,7 +36,7 @@ const FailurePopUp: FunctionComponent<FailurePopUpProps> = ({
         <Subtitle2>Support Email</Subtitle2>
         <div className={styles.supportEmail}>homehubdope@gmail.com</div>
       </div>
-      <Button className={styles.modalButton} onClick={retry}>
+      <Button className="text-center" onClick={retry}>
         <Subtitle2>Post again</Subtitle2>
       </Button>
     </div>
