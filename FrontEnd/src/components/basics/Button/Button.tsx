@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import cn from 'classnames';
-import styles from './Button.module.scss';
 import { Icon as IconType, IconProps } from '@icons';
+import styles from './Button.module.scss';
 
 /**
  * The size of the button. Primary = bigger, Secondary = smaller.
@@ -63,6 +63,7 @@ const Button: FunctionComponent<ButtonProps> = ({
 
   return (
     <button
+      type="button"
       className={cn(styles.button, styles[size], styles[variant], className)}
       {...buttonProps}
     >

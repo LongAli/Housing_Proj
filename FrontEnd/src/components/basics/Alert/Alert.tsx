@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { Icon as IconType, alertIcons } from '@icons';
-import styles from './Alert.module.scss';
+import { alertIcons } from '@icons';
 import Button from '@components/basics/Button';
 import cn from 'classnames';
+import styles from './Alert.module.scss';
 
 export type alertVariant = 'success' | 'alert' | 'warning' | 'info';
 

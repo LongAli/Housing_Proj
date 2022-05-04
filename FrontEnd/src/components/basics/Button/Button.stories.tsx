@@ -1,8 +1,9 @@
-import React, { ComponentProps } from 'react';
+import { ComponentProps } from 'react';
+import {
+  contactIcons, amenityIcons, Icon, IconObject,
+} from '@icons';
+import { joinObjects, StoryTemplate } from '@utils';
 import Button from './Button';
-import { contactIcons, amenityIcons, Icon, IconObject } from '@icons';
-import { joinObjects } from '@utils';
-import { StoryTemplate } from '@utils';
 
 type StorybookMapping = { [key: string]: { icon: Icon } };
 

@@ -1,7 +1,7 @@
 import React, { ComponentProps } from 'react';
+import { StoryTemplate } from '@utils';
 import RadioToggleGroup from './RadioToggleGroup';
 import { RadioToggleProps } from './RadioToggle';
-import { StoryTemplate } from '@utils';
 
 export default {
   title: 'RadioToggleGroup',
@@ -16,7 +16,9 @@ const Template = StoryTemplate<
 export const Default = Template.bind({});
 Default.args = {
   toggleProps: [
-    { id: '1', value: 'Cris is DOPE', withLabel: false, name: 'nah' },
+    {
+      id: '1', value: 'Cris is DOPE', withLabel: false, name: 'nah',
+    },
   ],
 };
 

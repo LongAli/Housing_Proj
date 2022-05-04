@@ -1,9 +1,12 @@
 // TODO change this to use the "Autocomplete" component in MaterialUI
-import { Body2, RequiredAsterisk } from '@basics';
+import Body2 from '@basics/Body2';
+import RequiredAsterisk from '@basics/RequiredAsterisk';
 import { useClickAwayListener } from '@hooks';
 import { miscIcons } from '@icons';
 import cn from 'classnames';
-import React, { FunctionComponent, useEffect, useRef, useState } from 'react';
+import React, {
+  FunctionComponent, useEffect, useRef, useState,
+} from 'react';
 import { Form } from 'react-bootstrap';
 import BootstrapDropdown, * as BootstrapDropdownMetadata from 'react-bootstrap/Dropdown';
 import * as z from 'zod';
@@ -20,7 +23,8 @@ interface DropdownProps extends BootstrapDropdownMetadata.DropdownProps {
   isInvalid?: boolean;
   isValid?: boolean;
   required?: boolean;
-  noFilter?: boolean; // Will make the user unable to filter through the options by typing in the dropdown's input
+  noFilter?: boolean;
+  // Will make the user unable to filter through the options by typing in the dropdown's input
   inlineText?: string;
   inlineTextClassName?: string;
 }
@@ -76,7 +80,9 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
       <Form.Group className={styles.moreSpecificity}>
         {(label || required) && (
           <Form.Label className={cn(styles.label, labelClassName)}>
-            {label} {required && <RequiredAsterisk />}
+            {label}
+            {' '}
+            {required && <RequiredAsterisk />}
           </Form.Label>
         )}
 

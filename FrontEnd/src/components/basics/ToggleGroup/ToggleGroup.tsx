@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useRef, FunctionComponent } from 'react';
+import React, {
+  useState, useEffect, useRef, FunctionComponent,
+} from 'react';
 import { Form } from 'react-bootstrap';
 import * as z from 'zod';
 import { Toggle, ErrorBox } from '@basics';
 import RequiredAsterisk from '@basics/RequiredAsterisk';
 import { Icon } from '@icons';
 import cn from 'classnames';
-import styles from './ToggleGroup.module.scss';
 import { isStringArray } from '@utils';
+import styles from './ToggleGroup.module.scss';
 
 export interface ToggleContent {
   icon: Icon;
@@ -39,11 +41,8 @@ interface ToggleGroupProps
  * Gets labels from provided content, which is either array of labels
  * or array of ToggleContent (which stores labels).
  */
-const getLabels = (content: string[] | ToggleContent[]): string[] => {
-  return (content as [ToggleContent | string]).map((c) =>
-    typeof c === 'string' ? c : c.label,
-  );
-};
+const getLabels = (content: string[] | ToggleContent[]): string[] => (content as [ToggleContent | string]).map((c) =>
+  (typeof c === 'string' ? c : c.label));
 
 /**
  * Transfers the selected array into an array of booleans describing whether
@@ -59,8 +58,7 @@ const selectedAsBoolArr = (
     }
 
     return getLabels(content).map((label) =>
-      (selected as string[]).includes(label),
-    );
+      (selected as string[]).includes(label));
   }
 
   return getLabels(content).map((label) => label === selected);
@@ -99,7 +97,9 @@ const ToggleGroup: FunctionComponent<ToggleGroupProps> = ({
       {(isInvalid || error) && <ErrorBox />}
       {(label || required) && (
         <Form.Label className={cn(styles.label, labelClassName)}>
-          {label} {required && <RequiredAsterisk />}
+          {label}
+          {' '}
+          {required && <RequiredAsterisk />}
         </Form.Label>
       )}
 
@@ -119,8 +119,8 @@ const ToggleGroup: FunctionComponent<ToggleGroupProps> = ({
               icon={icon}
               hideLabel={hideLabels}
               initialSelected={
-                typedInitialSelected.current &&
-                typedInitialSelected.current[index]
+                typedInitialSelected.current
+                && typedInitialSelected.current[index]
               }
               selected={areSelected[index]}
               onClick={(newSelected) => {

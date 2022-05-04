@@ -1,7 +1,7 @@
 {
   "root": true,
   "extends": ["next", "airbnb"],
-  "plugins": ["react-hooks"],
+  "plugins": ["@typescript-eslint"],
   "rules": {
     "no-underscore-dangle": ["error", { "allow": ["_420", "_420Chosen"] }],
     "@typescript-eslint/explicit-function-return-type": "off",
@@ -10,6 +10,7 @@
     "consistent-return": ["error", { "treatUndefinedAsUnspecified": true }], // why does the option not work
     "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
     "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
+    "react/require-default-props": "off",
     "react/function-component-definition": [
       2,
       { "namedComponents": "arrow-function" }
@@ -21,6 +22,15 @@
     "import/extensions": [2, "never"],
     "react/jsx-props-no-spreading": [0],
     "no-restricted-exports": [0],
-    "implicit-arrow-linebreak": [0]
-  }
+    "implicit-arrow-linebreak": [0],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["src/**"]
+      }
+    ]
+  },
+  "ignorePatterns": ["**/*.test.tsx"]
 }

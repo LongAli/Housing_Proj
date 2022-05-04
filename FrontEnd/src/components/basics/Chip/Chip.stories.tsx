@@ -1,7 +1,7 @@
-import React, { ComponentProps } from 'react';
-import Chip from './Chip';
+import { ComponentProps } from 'react';
 import { StoryTemplate } from '@utils';
 import { amenityIcons } from '@icons';
+import Chip from './Chip';
 
 export default {
   title: 'Chip',

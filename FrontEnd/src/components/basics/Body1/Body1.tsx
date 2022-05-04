@@ -3,8 +3,8 @@ import React, {
   DetailedHTMLProps,
   HTMLAttributes,
 } from 'react';
-import styles from './Body1.module.scss';
 import cn from 'classnames';
+import styles from './Body1.module.scss';
 
 export type Body1Props = DetailedHTMLProps<
   HTMLAttributes<HTMLDivElement>,

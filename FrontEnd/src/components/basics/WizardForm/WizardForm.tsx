@@ -125,13 +125,11 @@ const WizardForm = <T extends {}>({
    * of the provided ValidationErrors are unsuccessful, then it will return false.
    * Otherwise this will return true.
    */
-  const combineSuccesses = (v: ValidationErrors<Partial<T>>): boolean => {
-    return (
-      (Object.values(v) as Array<ValidationError>).find(
-        (data) => !data.success,
-      ) === undefined
-    );
-  };
+  const combineSuccesses = (v: ValidationErrors<Partial<T>>): boolean => (
+    (Object.values(v) as Array<ValidationError>).find(
+      (data) => !data.success,
+    ) === undefined
+  );
 
   /**
    * validatePickedValues is used to validate toParse using the provided schema. It
@@ -183,7 +181,7 @@ const WizardForm = <T extends {}>({
         const formError = parseResult.error.formErrors.formErrors[0];
         error = fieldError || formError;
       }
-      return { ...prevErrors, [curKey]: { success: !!!error, error } };
+      return { ...prevErrors, [curKey]: { success: !error, error } };
     };
 
     const validatedResults = toValidate.reduce(
@@ -221,9 +219,7 @@ const WizardForm = <T extends {}>({
    *
    * @return If the data is all valid.
    */
-  const validateCurrent = (): boolean => {
-    return validateStep(curIndex);
-  };
+  const validateCurrent = (): boolean => validateStep(curIndex);
 
   /**
    * Use this to navigate the wizard form to a specific step.
@@ -341,17 +337,15 @@ const WizardForm = <T extends {}>({
     </div>
   );
 
-  const FirstArrow = () => {
-    return isFirst ? (
-      <Button variant="wrapper">
-        <miscIcons.smallLeftArrowDisabled />
-      </Button>
-    ) : (
-      <Button variant="wrapper" onClick={prevStep}>
-        <miscIcons.smallLeftArrow />
-      </Button>
-    );
-  };
+  const FirstArrow = () => (isFirst ? (
+    <Button variant="wrapper">
+      <miscIcons.smallLeftArrowDisabled />
+    </Button>
+  ) : (
+    <Button variant="wrapper" onClick={prevStep}>
+      <miscIcons.smallLeftArrow />
+    </Button>
+  ));
 
   const LastArrow = () => {
     if (isLast) {

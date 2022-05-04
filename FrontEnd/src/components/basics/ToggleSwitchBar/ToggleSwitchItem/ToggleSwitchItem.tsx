@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import styles from './ToggleSwitchItem.module.scss';
 import cn from 'classnames';
+import styles from './ToggleSwitchItem.module.scss';
 
 interface ToggleSwitchItemProps {
   isActive: boolean;

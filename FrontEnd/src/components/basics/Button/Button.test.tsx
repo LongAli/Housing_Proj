@@ -1,7 +1,6 @@
 import React from 'react';
-import Button from './Button';
 import { render } from '@testing-library/react';
-import { contactIcons } from '@icons';
+import Button from './Button';
 // TODO When it is republished, remove the Github reop download and download from NPM
 // import CssDimension from 'parse-css-dimension';
 

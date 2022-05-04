@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useState } from 'react';
 import { Form, Col, FormControlProps } from 'react-bootstrap';
-import styles from './TextArea.module.scss';
 import { Body2 } from '@basics';
 import * as z from 'zod';
 import cn from 'classnames';
 import { Icon as IconType, miscIcons } from '@icons';
 import { useRandomID } from '@hooks';
+import styles from './TextArea.module.scss';
 
 interface TextAreaProps extends FormControlProps {
   maxLength: number;
@@ -34,8 +34,7 @@ const TextArea: FunctionComponent<TextAreaProps> = ({
   const [content, setContent] = useState<string>(defaultContent);
 
   // Contains the length of content without any whitespace (excluding spaces)
-  const [contentLengthNoWhiteSpace, setContentLengthNoWhiteSpace] =
-    useState<number>(0);
+  const [contentLengthNoWhiteSpace, setContentLengthNoWhiteSpace] = useState<number>(0);
 
   // Keeps track of if the textarea is in inBulletpointsMode mode
   const [inBulletpointsMode, setInBulletpointsMode] = useState<Boolean>(false);
@@ -55,14 +54,14 @@ const TextArea: FunctionComponent<TextAreaProps> = ({
       setInBulletpointsMode(true);
 
       if (
-        contentLengthNoWhiteSpace === 0 ||
-        content[content.length - 1] === '\n'
+        contentLengthNoWhiteSpace === 0
+        || content[content.length - 1] === '\n'
       ) {
         // Start a new list on the same line
-        setContent((prevContent) => prevContent + '* ');
+        setContent((prevContent) => `${prevContent}* `);
       } else if (contentLengthNoWhiteSpace + 2 <= maxLengthPlusWhiteSpace) {
         // Start a new list on the next line, as long as maxLengthPlusWhiteSpace has not been hit
-        setContent((prevContent) => prevContent + '\n* ');
+        setContent((prevContent) => `${prevContent}\n* `);
       }
 
       setContentLengthNoWhiteSpace((prevLength) => prevLength + 2);
@@ -97,14 +96,14 @@ const TextArea: FunctionComponent<TextAreaProps> = ({
         setInBulletpointsMode(false);
       }
     } else if (
-      e.key === 'Enter' &&
-      contentLengthNoWhiteSpace + 2 <= maxLength
+      e.key === 'Enter'
+      && contentLengthNoWhiteSpace + 2 <= maxLength
     ) {
       // Make sure keyboard event doesn't propagate to onChange handler
       e.preventDefault();
 
       // Add another bulletpoint line
-      setContent((prevContent) => prevContent + '\n* ');
+      setContent((prevContent) => `${prevContent}\n* `);
       setContentLengthNoWhiteSpace((prevLength) => prevLength + 2);
     } else if (e.key === '*') {
       e.preventDefault();
@@ -113,7 +112,7 @@ const TextArea: FunctionComponent<TextAreaProps> = ({
       setInBulletpointsMode(false);
 
       // Start cursor on new line
-      setContent((prevContent) => prevContent + '\n');
+      setContent((prevContent) => `${prevContent}\n`);
     }
   };
 
@@ -161,7 +160,9 @@ const TextArea: FunctionComponent<TextAreaProps> = ({
               [styles.charCheckError]: error,
             })}
           >
-            {contentLengthNoWhiteSpace}/{maxLength.toString()}
+            {contentLengthNoWhiteSpace}
+            /
+            {maxLength.toString()}
           </Body2>
         </div>
         {error && <miscIcons.alert className={styles.inputStatus} />}

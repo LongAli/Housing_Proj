@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
 import { WizardForm } from '@basics';
-import NPages from './NPages';
 import { StoryTemplate } from '@utils';
+import NPages from './NPages';
 
 export default {
   title: 'WizardForm',

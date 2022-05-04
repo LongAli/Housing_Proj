@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import RadioButton, { RadioButtonProps } from './RadioButton';
 import { Row } from 'react-bootstrap';
 import { ErrorBox } from '@basics';
-import styles from './RadioGroup.module.scss';
 import * as z from 'zod';
 import cn from 'classnames';
+import styles from './RadioGroup.module.scss';
+import RadioButton, { RadioButtonProps } from './RadioButton';
 
 export interface RadioGroupProps {
   buttonProps: RadioButtonProps[];
@@ -20,20 +20,18 @@ const RadioGroup: FunctionComponent<RadioGroupProps> = ({
   isInvalid,
   wrapperClass = 'mr-3',
   className = 'w-100',
-}) => {
-  return (
-    <Row className={cn(className, styles.wrapperRow)}>
-      {(isInvalid || error) && <ErrorBox />}
-      {buttonProps.map((props) => (
-        <div
-          key={props.value}
-          className={cn(wrapperClass, styles.buttonGroupChild)}
-        >
-          <RadioButton {...props} />
-        </div>
-      ))}
-    </Row>
-  );
-};
+}) => (
+  <Row className={cn(className, styles.wrapperRow)}>
+    {(isInvalid || error) && <ErrorBox />}
+    {buttonProps.map((props) => (
+      <div
+        key={props.value}
+        className={cn(wrapperClass, styles.buttonGroupChild)}
+      >
+        <RadioButton {...props} />
+      </div>
+    ))}
+  </Row>
+);
 
 export default RadioGroup;

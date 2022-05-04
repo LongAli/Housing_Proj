@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
-import StickyBar from './StickyBar';
 import { Alert, Button } from '@basics';
 import { StoryTemplate } from '@utils';
+import StickyBar from './StickyBar';
 
 export default {
   title: 'StickyBar',

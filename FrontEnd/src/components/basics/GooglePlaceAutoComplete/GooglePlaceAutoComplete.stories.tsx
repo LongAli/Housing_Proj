@@ -1,6 +1,6 @@
-import React, { ComponentProps } from 'react';
-import GooglePlaceAutoComplete from './GooglePlaceAutoComplete';
+import { ComponentProps } from 'react';
 import { StoryTemplate } from '@utils';
+import GooglePlaceAutoComplete from './GooglePlaceAutoComplete';
 
 export default {
   title: 'GooglePlaceAutoComplete',

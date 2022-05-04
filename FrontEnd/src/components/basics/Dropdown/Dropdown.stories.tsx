@@ -1,10 +1,10 @@
 import React, { ComponentProps } from 'react';
-import Dropdown from './Dropdown';
-import styles from './Dropdown.module.scss';
-import { Body1 } from '@basics';
+import Body1 from '@basics/Body1';
 import { amenityIcons } from '@icons';
 import cn from 'classnames';
 import { StoryTemplate } from '@utils';
+import styles from './Dropdown.module.scss';
+import Dropdown from './Dropdown';
 
 export default {
   title: 'Dropdown',

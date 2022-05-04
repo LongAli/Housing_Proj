@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import styles from './RadioToggle.module.scss';
 import { Body1 } from '@basics';
 import { useRandomID } from '@hooks';
+import styles from './RadioToggle.module.scss';
 
 export interface RadioToggleProps {
   id?: string;

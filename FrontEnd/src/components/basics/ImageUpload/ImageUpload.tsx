@@ -1,11 +1,12 @@
 import React, { FunctionComponent, ChangeEvent, useState } from 'react';
 import { Form, Row } from 'react-bootstrap';
-import { FilledImage, Button } from '@basics';
+import FilledImage from '@basics/FilledImage';
+import Button from '@basics/Button';
 import * as z from 'zod';
 import { imageUpload, miscIcons } from '@icons';
-import styles from './ImageUpload.module.scss';
 import cn from 'classnames';
-import { useRandomID } from '@hooks';
+import useRandomID from '@hooks/useRandomID';
+import styles from './ImageUpload.module.scss';
 
 interface UploadButtonProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -70,9 +71,11 @@ interface ImageUploadProps {
 const UPLOAD_SIZE_LIMIT = 6;
 
 /* The Beautiful Image Uploader
-Notes: the limit of this uploader is 6 due to how it was designed. 
-It has a fixed width and height and would resize based on different screen sizes.
-Usage: to use it, simply provide it with an optional photosHandler for handling the files updated inside the image uploader
+Notes: the limit of this uploader is 6 due to how it was designed.
+It has a fixed width and height and would resize based on
+different screen sizes.
+Usage: to use it, simply provide it with an optional photosHandler
+for handling the files updated inside the image uploader
 */
 const ImageUpload: FunctionComponent<ImageUploadProps> = ({
   photosHandler,
@@ -112,8 +115,8 @@ const ImageUpload: FunctionComponent<ImageUploadProps> = ({
             key={file.name}
           />
         ))}
-        {files.length !== UPLOAD_SIZE_LIMIT &&
-          (files.length ? (
+        {files.length !== UPLOAD_SIZE_LIMIT
+          && (files.length ? (
             <div className={cn(styles.singleImage, 'd-flex')}>
               <UploadButton onChange={onChange} />
             </div>

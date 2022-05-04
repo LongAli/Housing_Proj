@@ -1,4 +1,5 @@
-import { Body2, Input } from '@basics';
+import Body2 from '@basics/Body2';
+import Input from '@basics/Input';
 import { miscIcons } from '@icons';
 import cn from 'classnames';
 import React, { useState } from 'react';
@@ -28,13 +29,13 @@ const GooglePlaceAutoComplete: React.FC<GooglePlaceAutoCompleteProps> = ({
     <div className={styles.wrapper}>
       <PlacesAutocomplete
         value={address}
-        onChange={(address) => {
+        onChange={() => {
           setAddress(address);
           if (onChange) {
             onChange(address);
           }
         }}
-        onSelect={(address) => {
+        onSelect={() => {
           setAddress(address);
           if (onSelect) {
             onSelect(address, '');

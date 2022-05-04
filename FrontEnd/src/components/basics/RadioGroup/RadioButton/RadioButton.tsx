@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useRef } from 'react';
-import styles from './RadioButton.module.scss';
 import { useRandomID } from '@hooks';
 import { FormControlProps } from 'react-bootstrap';
+import styles from './RadioButton.module.scss';
 
 export interface RadioButtonProps extends FormControlProps {
   id?: string;

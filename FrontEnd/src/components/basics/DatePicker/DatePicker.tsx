@@ -3,9 +3,9 @@ import { DateRangePicker } from 'react-dates';
 import moment from 'moment';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
-import styles from './DatePicker.module.scss';
 import { miscIcons } from '@icons';
 import cn from 'classnames';
+import styles from './DatePicker.module.scss';
 
 const PrevArrow = () => (
   <miscIcons.largeLeftArrow
@@ -63,9 +63,9 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
       endDate={endDate}
       numberOfMonths={1}
       displayFormat="MMM D"
-      showClearDates={true}
+      showClearDates
       focusedInput={focus}
-      keepOpenOnDateSelect={true}
+      keepOpenOnDateSelect
       onFocusChange={setFocus}
       startDateId="startDate"
       endDateId="endDate"

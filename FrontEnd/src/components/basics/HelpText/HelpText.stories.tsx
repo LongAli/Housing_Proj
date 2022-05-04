@@ -1,6 +1,6 @@
-import React, { ComponentProps } from 'react';
-import HelpText from './HelpText';
+import { ComponentProps } from 'react';
 import { StoryTemplate } from '@utils';
+import HelpText from './HelpText';
 
 export default {
   title: 'HelpText',

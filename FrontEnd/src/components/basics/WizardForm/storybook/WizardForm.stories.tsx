@@ -6,7 +6,9 @@ import {
   Dropdown,
   ToggleGroup,
 } from '@basics';
-import { SchoolYear, NON_EMPTY_ERR_MSG, majors, phoneRegex } from '@constants';
+import {
+  SchoolYear, NON_EMPTY_ERR_MSG, majors, phoneRegex,
+} from '@constants';
 import * as z from 'zod';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -55,82 +57,80 @@ const Page: FunctionComponent<WizardFormStep<Store>> = ({
   major,
   validations,
   setStore,
-}) => {
-  return (
-    <Container>
-      <Row className="justify-content-center m-2">
-        <Col md={12}>
-          <Input
-            label="Name"
-            type="text"
-            value={name}
-            required
-            onChange={(e) => setStore({ name: e.target.value })}
-            placeholder="Name"
-            isValid={validations?.name?.success}
-            error={validations?.name?.error}
-          />
-        </Col>
+}) => (
+  <Container>
+    <Row className="justify-content-center m-2">
+      <Col md={12}>
+        <Input
+          label="Name"
+          type="text"
+          value={name}
+          required
+          onChange={(e) => setStore({ name: e.target.value })}
+          placeholder="Name"
+          isValid={validations?.name?.success}
+          error={validations?.name?.error}
+        />
+      </Col>
 
-        <Col sm={12} md={6}>
-          <Input
-            label="Email"
-            type="text"
-            value={email}
-            required
-            onChange={(e) => setStore({ email: e.target.value })}
-            placeholder="Email"
-            isValid={validations?.email?.success}
-            error={validations?.email?.error}
-          />
-        </Col>
+      <Col sm={12} md={6}>
+        <Input
+          label="Email"
+          type="text"
+          value={email}
+          required
+          onChange={(e) => setStore({ email: e.target.value })}
+          placeholder="Email"
+          isValid={validations?.email?.success}
+          error={validations?.email?.error}
+        />
+      </Col>
 
-        <Col sm={12} md={6}>
-          <Input
-            label="Phone"
-            type="text"
-            value={phone}
-            required
-            onChange={(e) => setStore({ phone: e.target.value })}
-            placeholder="Phone number"
-            isValid={validations?.phone?.success}
-            error={validations?.phone?.error}
-          />
-        </Col>
+      <Col sm={12} md={6}>
+        <Input
+          label="Phone"
+          type="text"
+          value={phone}
+          required
+          onChange={(e) => setStore({ phone: e.target.value })}
+          placeholder="Phone number"
+          isValid={validations?.phone?.success}
+          error={validations?.phone?.error}
+        />
+      </Col>
 
-        <Col md={12}>
-          <ToggleGroup
-            singleSelect
-            content={Object.values(SchoolYear)}
-            label="School Year"
-            toggleClassName="my-0"
-            required
-            initialSelected={schoolYear}
-            onSelect={({ label, selected }) => {
-              setStore({
-                schoolYear: selected ? (label as SchoolYear) : undefined,
-              });
-            }}
-            error={validations?.schoolYear?.error}
-          />
-        </Col>
+      <Col md={12}>
+        <ToggleGroup
+          singleSelect
+          content={Object.values(SchoolYear)}
+          label="School Year"
+          toggleClassName="my-0"
+          required
+          initialSelected={schoolYear}
+          onSelect={({ label, selected }) => {
+            setStore({
+              schoolYear: selected ? (label as SchoolYear) : undefined,
+            });
+          }}
+          error={validations?.schoolYear?.error}
+        />
+      </Col>
 
-        <Col md={12}>
-          <Dropdown
-            options={majors}
-            label="Major"
-            onSelect={(s) => setStore({ major: s || undefined })}
-            initialSelected={major}
-            placeholder="Major"
-            isValid={validations?.major?.success}
-            error={validations?.major?.error}
-            required
-          />
-        </Col>
-      </Row>
-    </Container>
-  );
-};
+      <Col md={12}>
+        <Dropdown
+          options={majors}
+          label="Major"
+          onSelect={(s) => setStore({ major: s || undefined })}
+          initialSelected={major}
+          placeholder="Major"
+          isValid={validations?.major?.success}
+          error={validations?.major?.error}
+          required
+        />
+      </Col>
+    </Row>
+  </Container>
+);
 
 // NOTE: need the "as FunctionComponent" since typescript doesn't know that WizardForm parent component will provide the WizardFormStep props
 const TypedPage = Page as FunctionComponent;

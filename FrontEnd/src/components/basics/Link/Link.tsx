@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import styles from './Link.module.scss';
 import cn from 'classnames';
 import NextJSLink, { LinkProps as NextJSLinkProps } from 'next/link';
 import { isRunningInStorybook } from '@utils';
+import styles from './Link.module.scss';
 
 interface LinkProps extends NextJSLinkProps {
   className?: string;

@@ -1,6 +1,6 @@
 import React, { ComponentProps } from 'react';
-import TextArea from './TextArea';
 import { StoryTemplate } from '@utils';
+import TextArea from './TextArea';
 
 export default {
   title: 'TextArea',

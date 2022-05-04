@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
-import styles from './CheckBoxButton.module.scss';
 import { checkboxIcons } from '@icons';
-import { useRandomID } from '@hooks';
+import useRandomID from '@hooks/useRandomID';
+import styles from './CheckBoxButton.module.scss';
 
 export interface CheckBoxButtonProps {
   id?: string;
@@ -32,7 +32,7 @@ const CheckBoxButton: FunctionComponent<CheckBoxButtonProps> = ({
       {checked ? (
         <checkboxIcons.checked className={styles.checkbox} onClick={onClick} />
       ) : (
-        <div className={styles.notChecked} onClick={onClick}></div>
+        <div className={styles.notChecked} onClick={onClick} />
       )}
       {withLabel && (
         <label htmlFor={buttonID}>

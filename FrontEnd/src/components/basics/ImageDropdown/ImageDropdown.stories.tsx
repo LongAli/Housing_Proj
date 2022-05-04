@@ -1,7 +1,7 @@
+import { Meta, Story } from '@storybook/react';
 import React, { ComponentProps } from 'react';
-import { Story, Meta } from '@storybook/react';
-import ImageDropdown, { itemConfig } from './ImageDropdown';
 import Navbar from 'react-bootstrap/Navbar';
+import ImageDropdown, { itemConfig } from './ImageDropdown';
 
 export default {
   title: 'ImageDropdown',
@@ -37,8 +37,7 @@ const itemProps: itemConfig[] = [
   },
 ];
 
-const imageSrc =
-  'https://houseit.s3.us-east-2.amazonaws.com/assets/Homehub_logo.png';
+const imageSrc = 'https://houseit.s3.us-east-2.amazonaws.com/assets/Homehub_logo.png';
 
 export const Default = Template.bind({});
 Default.args = {

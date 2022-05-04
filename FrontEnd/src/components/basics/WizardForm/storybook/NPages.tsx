@@ -47,7 +47,7 @@ const NPages: FunctionComponent<NPagesProps> = ({
 
   return (
     <WizardForm<Store>
-      show={true}
+      show
       onHide={() => {}}
       onSubmit={() => true}
       title="Example Title Here"

@@ -1,7 +1,7 @@
-import React, { ComponentProps } from 'react';
-import InputLine from './InputLine';
+import { ComponentProps } from 'react';
 import { miscIcons } from '@icons';
 import { StoryTemplate } from '@utils';
+import InputLine from './InputLine';
 
 export default {
   title: 'InputLine',

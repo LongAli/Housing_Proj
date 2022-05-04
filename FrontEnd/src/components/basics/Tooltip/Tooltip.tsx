@@ -34,17 +34,15 @@ const InfoIcon: FunctionComponent = () => (
 const PopperWrapper: FunctionComponent<PopperWrapperProps> = ({
   isSingleLine,
   children,
-}) => {
-  return (
-    <div
-      className={cn(styles.tooltip, {
-        [styles.tooltipSingleLine]: isSingleLine,
-      })}
-    >
-      <Body2 className={styles.tooltipText}>{children}</Body2>
-    </div>
-  );
-};
+}) => (
+  <div
+    className={cn(styles.tooltip, {
+      [styles.tooltipSingleLine]: isSingleLine,
+    })}
+  >
+    <Body2 className={styles.tooltipText}>{children}</Body2>
+  </div>
+);
 
 /**
  * Tooltip. `title` is what will appear in the popup. `children` is what the popup will
@@ -57,21 +55,19 @@ const Tooltip: FunctionComponent<TooltipProps> = ({
   isSingleLine,
   className,
   ...props
-}) => {
-  return (
-    <MaterialUITooltip
-      title={<PopperWrapper isSingleLine={isSingleLine}>{title}</PopperWrapper>}
-      classes={{
-        tooltip: styles.MUITooltip,
-      }}
-      {...props}
-    >
-      <div className={cn(styles.wrapper, className)}>
-        {!hideInfoIcon && <InfoIcon />}
-        <Caption className={styles.childrenWrapper}>{children}</Caption>
-      </div>
-    </MaterialUITooltip>
-  );
-};
+}) => (
+  <MaterialUITooltip
+    title={<PopperWrapper isSingleLine={isSingleLine}>{title}</PopperWrapper>}
+    classes={{
+      tooltip: styles.MUITooltip,
+    }}
+    {...props}
+  >
+    <div className={cn(styles.wrapper, className)}>
+      {!hideInfoIcon && <InfoIcon />}
+      <Caption className={styles.childrenWrapper}>{children}</Caption>
+    </div>
+  </MaterialUITooltip>
+);
 
 export default Tooltip;

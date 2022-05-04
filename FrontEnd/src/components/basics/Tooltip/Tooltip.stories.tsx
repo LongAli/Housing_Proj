@@ -1,6 +1,6 @@
 import React, { ComponentProps } from 'react';
-import Tooltip from './Tooltip';
 import { StoryTemplate } from '@utils';
+import Tooltip from './Tooltip';
 
 export default {
   title: 'Tooltip',

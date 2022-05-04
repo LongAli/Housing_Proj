@@ -1,7 +1,7 @@
 import React, { ComponentProps } from 'react';
+import { StoryTemplate } from '@utils';
 import RadioGroup from './RadioGroup';
 import { RadioButtonProps } from './RadioButton';
-import { StoryTemplate } from '@utils';
 
 export default {
   title: 'RadioGroup',
@@ -16,7 +16,9 @@ const Template = StoryTemplate<
 export const Default = Template.bind({});
 Default.args = {
   buttonProps: [
-    { id: '1', value: 'Cris is DOPE', withLabel: false, name: 'nah' },
+    {
+      id: '1', value: 'Cris is DOPE', withLabel: false, name: 'nah',
+    },
   ],
 };
 

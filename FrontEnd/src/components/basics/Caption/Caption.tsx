@@ -3,8 +3,8 @@ import React, {
   DetailedHTMLProps,
   HTMLAttributes,
 } from 'react';
-import styles from './Caption.module.scss';
 import cn from 'classnames';
+import styles from './Caption.module.scss';
 
 export type CaptionProps = DetailedHTMLProps<
   HTMLAttributes<HTMLDivElement>,

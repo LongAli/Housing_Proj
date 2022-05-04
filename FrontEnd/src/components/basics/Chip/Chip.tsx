@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { Icon as IconType } from '@icons';
-import styles from './Chip.module.scss';
+import { Icon as IconType, miscIcons } from '@icons';
 import cn from 'classnames';
-import { miscIcons } from '@icons';
+import styles from './Chip.module.scss';
 
 export type ChipState = 'default' | 'hover' | 'disabled';
 
@@ -10,7 +9,6 @@ export interface ChipProps {
   state: ChipState;
   text: string;
   shouldDismiss: boolean;
-  onClose?: () => any;
   icon?: IconType;
 }
 
@@ -19,32 +17,28 @@ const Chip: FunctionComponent<ChipProps> = ({
   icon: Icon,
   text,
   shouldDismiss,
-}) => {
-  return (
-    <div
-      className={cn(styles.chip, styles[state], {
-        [styles.chipWithIcon]: Icon,
-      })}
-    >
-      {Icon && (
-        <div>
-          <Icon />
-        </div>
-      )}
-      <div className={cn({ [styles.opacity]: state === 'disabled' })}>
-        {text}
+}) => (
+  <div
+    className={cn(styles.chip, styles[state], {
+      [styles.chipWithIcon]: Icon,
+    })}
+  >
+    {Icon && (
+      <div>
+        <Icon />
       </div>
-      {shouldDismiss && (
-        <div
-          className={cn(styles.cross, {
-            [styles.opacity]: state === 'disabled',
-          })}
-        >
-          <miscIcons.orangeX />
-        </div>
-      )}
-    </div>
-  );
-};
+    )}
+    <div className={cn({ [styles.opacity]: state === 'disabled' })}>{text}</div>
+    {shouldDismiss && (
+      <div
+        className={cn(styles.cross, {
+          [styles.opacity]: state === 'disabled',
+        })}
+      >
+        <miscIcons.orangeX />
+      </div>
+    )}
+  </div>
+);
 
 export default Chip;

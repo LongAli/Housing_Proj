@@ -1,6 +1,6 @@
-import React, { ComponentProps } from 'react';
-import Amenities from './Amenities';
+import { ComponentProps } from 'react';
 import { StoryTemplate } from '@utils';
+import Amenities from './Amenities';
 
 export default {
   title: 'Amenities',

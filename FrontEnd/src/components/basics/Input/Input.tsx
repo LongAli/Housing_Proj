@@ -2,9 +2,9 @@ import React, { useState, FunctionComponent } from 'react';
 import { Form, FormControlProps } from 'react-bootstrap';
 import * as z from 'zod';
 import cn from 'classnames';
+import { Icon as IconType, miscIcons } from '@icons';
 import styles from './Input.module.scss';
 import RequiredAsterisk from '../RequiredAsterisk';
-import { Icon as IconType, miscIcons } from '@icons';
 
 export interface InputProps
   extends FormControlProps,
@@ -49,7 +49,9 @@ const Input: FunctionComponent<InputProps> = ({
       <Form.Group>
         {(label || required) && (
           <Form.Label className={cn(styles.label, labelClassName)}>
-            {label} {required && <RequiredAsterisk />}
+            {label}
+            {' '}
+            {required && <RequiredAsterisk />}
           </Form.Label>
         )}
 

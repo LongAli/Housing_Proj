@@ -21,7 +21,13 @@ const Head: FunctionComponent<HeadProps> = ({
   children,
 }) => (
   <NextHead>
-    {title ? <title>{title} | Homehub</title> : <title>Homehub</title>}
+    {title ? (
+      <title>
+        {title}
+        {' '}
+        | Homehub
+      </title>
+    ) : <title>Homehub</title>}
 
     <meta
       name="viewport"

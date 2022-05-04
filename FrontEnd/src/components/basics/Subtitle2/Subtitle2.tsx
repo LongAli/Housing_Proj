@@ -3,8 +3,8 @@ import React, {
   DetailedHTMLProps,
   HTMLAttributes,
 } from 'react';
-import styles from './Subtitle2.module.scss';
 import cn from 'classnames';
+import styles from './Subtitle2.module.scss';
 
 export type Subtitle2Props = DetailedHTMLProps<
   HTMLAttributes<HTMLDivElement>,

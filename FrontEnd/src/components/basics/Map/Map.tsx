@@ -5,10 +5,10 @@ import {
   Marker,
 } from 'react-google-maps';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
-import styles from './Map.module.scss';
 import cn from 'classnames';
 import useAsyncEffect from 'use-async-effect';
 import { formatWithAws } from '@utils';
+import styles from './Map.module.scss';
 
 interface Coords {
   lat: number;
@@ -50,8 +50,8 @@ const GoogleMap: FunctionComponent<PathProps> = ({ address, className }) => {
   return (
     <div className={cn(styles.wrapper, className)}>
       <GoogleMapRender
-        containerElement={<div style={{ height: `100%` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
+        containerElement={<div style={{ height: '100%' }} />}
+        mapElement={<div style={{ height: '100%' }} />}
       />
     </div>
   );

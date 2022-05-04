@@ -1,6 +1,6 @@
-import React, { ComponentProps } from 'react';
-import AmenityIcon from './AmenityIcon';
+import { ComponentProps } from 'react';
 import { StoryTemplate } from '@utils';
+import AmenityIcon from './AmenityIcon';
 
 export default {
   title: 'AmenityIcon',

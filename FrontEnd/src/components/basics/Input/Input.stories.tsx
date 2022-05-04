@@ -1,7 +1,7 @@
-import React, { ComponentProps } from 'react';
-import Input from './Input';
+import { ComponentProps } from 'react';
 import { miscIcons } from '@icons';
 import { StoryTemplate } from '@utils';
+import Input from './Input';
 
 export default {
   title: 'Input',

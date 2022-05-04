@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import CheckBoxButton, { CheckBoxButtonProps } from './CheckBox';
 import { Row, Col } from 'react-bootstrap';
+import { v4 as uuidv4 } from 'uuid';
+import CheckBoxButton, { CheckBoxButtonProps } from './CheckBox/CheckBoxButton';
 
 export interface CheckBoxGroupProps {
   buttonProps: CheckBoxButtonProps[];
@@ -8,16 +9,14 @@ export interface CheckBoxGroupProps {
 
 const CheckBoxGroup: FunctionComponent<CheckBoxGroupProps> = ({
   buttonProps,
-}) => {
-  return (
-    <Row className="w-100">
-      {buttonProps.map((props) => (
-        <Col xs={6} md={4} key={props.value}>
-          <CheckBoxButton {...props} />
-        </Col>
-      ))}
-    </Row>
-  );
-};
+}) => (
+  <Row className="w-100">
+    {buttonProps.map((props) => (
+      <Col xs={6} md={4} key={uuidv4()}>
+        <CheckBoxButton {...props} />
+      </Col>
+    ))}
+  </Row>
+);
 
 export default CheckBoxGroup;

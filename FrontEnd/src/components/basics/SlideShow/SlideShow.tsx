@@ -1,10 +1,10 @@
 import React, { useState, FunctionComponent } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import { carouselIcons } from '@icons';
+import cn from 'classnames';
 import Thumbnails from './Thumbnails/Thumbnails';
 import SlideShowItem from './SlideShowItem/SlideShowItem';
 import styles from './SlideShow.module.scss';
-import cn from 'classnames';
 
 export interface SlideShowItem {
   src: string;

@@ -11,34 +11,32 @@ interface LoadingProps {
 const PROGRESS_THICKNESS = 4;
 const PROGRESS_SIZE = 40;
 
-const Loading: FunctionComponent<LoadingProps> = ({ text }) => {
-  return (
-    <div
-      className={cn(
-        styles.loadingWrapper,
-        'w-100 d-flex flex-column justify-content-center align-items-center',
-      )}
-    >
-      <div className={styles.loadingBackground}></div>
-      <div className={styles.root}>
-        <CircularProgress
-          variant="determinate"
-          className={styles.bottom}
-          size={PROGRESS_SIZE}
-          thickness={PROGRESS_THICKNESS}
-          value={100}
-        />
-        <CircularProgress
-          variant="indeterminate"
-          disableShrink
-          className={styles.top}
-          size={PROGRESS_SIZE}
-          thickness={PROGRESS_THICKNESS}
-        />
-      </div>
-      <Subtitle2>{text}</Subtitle2>
+const Loading: FunctionComponent<LoadingProps> = ({ text }) => (
+  <div
+    className={cn(
+      styles.loadingWrapper,
+      'w-100 d-flex flex-column justify-content-center align-items-center',
+    )}
+  >
+    <div className={styles.loadingBackground} />
+    <div className={styles.root}>
+      <CircularProgress
+        variant="determinate"
+        className={styles.bottom}
+        size={PROGRESS_SIZE}
+        thickness={PROGRESS_THICKNESS}
+        value={100}
+      />
+      <CircularProgress
+        variant="indeterminate"
+        disableShrink
+        className={styles.top}
+        size={PROGRESS_SIZE}
+        thickness={PROGRESS_THICKNESS}
+      />
     </div>
-  );
-};
+    <Subtitle2>{text}</Subtitle2>
+  </div>
+);
 
 export default Loading;

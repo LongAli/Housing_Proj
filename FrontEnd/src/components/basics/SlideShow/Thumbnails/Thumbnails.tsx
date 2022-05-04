@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
+import cn from 'classnames';
 import { SlideShowItem } from '../SlideShow';
 import styles from './Thumbnails.module.scss';
-import cn from 'classnames';
 import Thumbnail from './Thumbnail';
 
 const widthPercent = (numCols: number, maxNumCols: number) =>
