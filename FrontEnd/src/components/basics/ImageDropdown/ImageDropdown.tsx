@@ -2,7 +2,6 @@ import Button from '@basics/Button';
 import cn from 'classnames';
 import React, { FunctionComponent } from 'react';
 import BootstrapDropdown, * as BootstrapDropdownMetadata from 'react-bootstrap/Dropdown';
-import Image from 'next/image';
 import styles from './ImageDropdown.module.scss';
 
 // TODO expand this
@@ -30,7 +29,7 @@ const ImageDropdown: FunctionComponent<ImageDropdownProps> = ({
       className={styles.profileToggle}
       variant="wrapper"
     >
-      <Image className={styles.profileImage} src={profileIcon} />
+      <img className={styles.profileImage} src={profileIcon} />
     </BootstrapDropdown.Toggle>
     {/* TODO might need to make the menu a basic  component itself */}
     <BootstrapDropdown.Menu className={styles.dropdownMenu} align="right">

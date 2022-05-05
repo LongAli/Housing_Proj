@@ -30,7 +30,8 @@
       {
         "devDependencies": ["src/**"]
       }
-    ]
+    ],
+    "@next/next/no-img-element": [0]
   },
   "ignorePatterns": ["**/*.test.tsx"]
 }
