@@ -1,6 +1,6 @@
 import { StoryTemplate } from '@utils';
 import { ComponentProps } from 'react';
-import Page2 from './Page2';
+import Page2 from './BioPage';
 
 export default {
   title: 'Setup Page2',

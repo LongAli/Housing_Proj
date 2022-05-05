@@ -25,7 +25,7 @@ const SuccessPopUp: FunctionComponent<PopUpProps> = ({
     <Subtitle1 className="text-center mt-4">
       You’ve successfully posted it!
     </Subtitle1>
-    <div className={styles.supportText}>
+    <div className={styles.SuccessSupportText}>
       Peers who are interested will contact through your email or phone! Please
       remember to check!
     </div>

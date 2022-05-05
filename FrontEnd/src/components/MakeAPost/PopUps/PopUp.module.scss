@@ -37,13 +37,22 @@
   width: 100%;
 }
 
-.supportText {
+.failSupportText {
   margin-top: 0.5rem;
-  text-align-last: center;
+  text-align-last: left;
+  margin-left: 25px;
 
   @include font-type('body 3');
 }
 
+.SuccessSupportText {
+  margin-top: 0.5rem;
+  text-align-last: center;
+  margin-left: 0px;
+  margin-bottom: -30px;
+
+  @include font-type('body 3');
+}
 .failPopUpBottom {
   display: flex;
   align-items: center;
@@ -59,4 +68,9 @@
 
 .supportEmail {
   @include font-type('body 5');
+}
+
+.linkText {
+  color: black;
+  text-decoration: none;
 }

@@ -1,7 +1,11 @@
 import React, { FunctionComponent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Page1, { Page1Store, page1InitialStore, page1Schema } from './Page1';
-import Page2, { Page2Store, page2InitialStore, page2Schema } from './Page2';
+import BioPage, {
+  BioPageStore,
+  bioPageInitialStore,
+  bioPageSchema,
+} from './BioPage';
 // Test NamePage
 import styles from './NewUserSetup.module.scss';
 import NamePage, {
@@ -31,14 +35,14 @@ type Store = NamePageStore &
   EducationPageStore &
   PhonePageStore &
   Page1Store &
-  Page2Store;
+  BioPageStore;
 
 const schemas = [
   namePageSchema,
   educationPageSchema,
   phonePageSchema,
   page1Schema,
-  page2Schema,
+  bioPageSchema,
 ];
 
 const NewUserSetup: FunctionComponent = () => {
@@ -82,14 +86,14 @@ const NewUserSetup: FunctionComponent = () => {
           name: showNewUserPopup.name,
           email: showNewUserPopup.email,
         },
-        page2InitialStore,
+        bioPageInitialStore,
       ]}
       schemas={schemas}
     >
       <NamePage />
       <EducationPage />
       <PhonePage />
-
+      <BioPage />
     </WizardForm>
   );
 };

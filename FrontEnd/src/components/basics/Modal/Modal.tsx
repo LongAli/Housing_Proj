@@ -15,7 +15,7 @@ const isModalGraphicImage = (
   t: ModalGraphicImage | ModalGraphicIcon,
 ): t is ModalGraphicImage => 'src' in t;
 
-interface ModalProps
+export interface ModalProps
   extends Omit<
     MaterialUIModalProps,
     'onClose' | 'disableBackdropClick' | 'children'

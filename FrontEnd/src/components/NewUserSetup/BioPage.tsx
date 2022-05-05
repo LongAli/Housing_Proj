@@ -1,36 +1,40 @@
 import React, { FunctionComponent } from 'react';
 import * as z from 'zod';
 import { Container } from 'react-bootstrap';
+import Row from 'react-bootstrap/Row';
 import { WizardFormStep, TextArea } from '@basics';
 import styles from './NewUserSetup.module.scss';
 
-export const page2Schema = z.object({
+export const bioPageSchema = z.object({
   description: z
     .string()
     .min(1, 'You need to provide an introduction for others!')
     .max(600, 'Your introduction can only have maximum of 600 characters'),
 });
 
-export type Page2Store = z.infer<typeof page2Schema>;
+export type BioPageStore = z.infer<typeof bioPageSchema>;
 
-export const page2InitialStore: Page2Store = {
+export const bioPageInitialStore: BioPageStore = {
   description: '',
 };
 
-const PostPage2: FunctionComponent<WizardFormStep<Page2Store>> = ({
+const PostBioPage: FunctionComponent<WizardFormStep<BioPageStore>> = ({
   description,
   validations,
   setStore,
 }) => {
   return (
-    <Container>
+    <Container className={styles.bio}>
+      <Row className="row justify-content-md-center m-2">
+        <div className={styles.bioAsk}>Lastly if you'd like...</div>
+      </Row>
       <TextArea
-        label="Share a bit more about yourself!"
+        label="Short bio"
         as="textarea"
         value={description}
-        placeHolder=" What are you up to later? &#13;
-        What do you like to do for fun? &#13;&#10;
-        The more personal it be, the more likely you will find someone who click!"
+        placeHolder=" Share a bit more about yourself!
+        What are you up to later? What do you like to do for fun? &#13;&#10;
+        The more personal it be, the more likely you will find someone who  click!"
         onChange={(e) => setStore({ description: e.target.value })}
         isValid={validations?.description?.success}
         error={validations?.description?.error}
@@ -41,4 +45,4 @@ const PostPage2: FunctionComponent<WizardFormStep<Page2Store>> = ({
   );
 };
 
-export default PostPage2 as FunctionComponent;
+export default PostBioPage as FunctionComponent;

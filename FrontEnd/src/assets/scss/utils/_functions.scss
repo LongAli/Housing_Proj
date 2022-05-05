@@ -1,0 +1,6 @@
+/**
+ * STYLE GUIDE Spacing multiplication
+ */
+@function spacing($base) {
+  @return math.div($base, 100);
+}
